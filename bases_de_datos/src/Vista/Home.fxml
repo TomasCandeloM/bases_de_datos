@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vista.HomeController">
-    
+<AnchorPane id="AnchorPane" prefHeight="647.0" prefWidth="889.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.HomeController">
+   <children>
+      <CheckBox fx:id="cbPContinent" layoutX="14.0" layoutY="169.0" mnemonicParsing="false" text="Continente" />
+      <CheckBox fx:id="cbPRegion" layoutX="174.0" layoutY="169.0" mnemonicParsing="false" text="Region" />
+      <CheckBox fx:id="cbPSurfacearea" layoutX="166.0" layoutY="250.0" mnemonicParsing="false" text="Superficie" />
+      <CheckBox layoutX="14.0" layoutY="196.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="160.0" text="Año de independencia " />
+      <CheckBox fx:id="cbPpopulation" layoutX="174.0" layoutY="209.0" mnemonicParsing="false" text="Población" />
+      <CheckBox fx:id="cbPGovernmentform" layoutX="14.0" layoutY="250.0" mnemonicParsing="false" text="Forma de gobierno " />
+   </children>
 </AnchorPane>
