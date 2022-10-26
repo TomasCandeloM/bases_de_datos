@@ -29,7 +29,7 @@ public class Bases_de_datos extends Application{
         ventana.setTitle("Base de Datos world");
         ventana.setResizable(false); // no permite redimensionar la ventana
 
-        ventana.setOnCloseRequest(event -> {event.consume();}); //deshabilita la X de cerrar...
+        //ventana.setOnCloseRequest(event -> {event.consume();}); //deshabilita la X de cerrar...
         ventana.show();
     }
 
