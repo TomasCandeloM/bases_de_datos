@@ -23,6 +23,7 @@ public class Conexion {
     Connection cx;
 
     public Conexion() {
+        
     }
 
   public Connection conectar() {
@@ -36,7 +37,7 @@ public class Conexion {
             
         }
         return cx;
-  }
+    }
   
   public void desconectar(){
         try {
