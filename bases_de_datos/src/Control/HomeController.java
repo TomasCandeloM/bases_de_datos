@@ -19,6 +19,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.StageStyle;
 
@@ -78,6 +79,38 @@ public class HomeController implements Initializable {
     private Button btn_addLanguage;
     @FXML
     private TextField txt_Lpercentage;
+    @FXML
+    private TextField txt_Pcode;
+    @FXML
+    private TextField txt_Pname;
+    @FXML
+    private TextField txt_Pregion;
+    @FXML
+    private TextField txt_Psurface;
+    @FXML
+    private TextField txt_PindepYear;
+    @FXML
+    private TextField txt_Ppopulation;
+    @FXML
+    private TextField txt_lPifeExpentacy;
+    @FXML
+    private TextField txt_Pganp;
+    @FXML
+    private TextField txt_PgnpOld;
+    @FXML
+    private TextField txt_PlocalName;
+    @FXML
+    private TextField txt_Pgovernmentform;
+    @FXML
+    private TextField txt_PheadofState;
+    @FXML
+    private TextField txt_Pcapital;
+    @FXML
+    private TextField txt_Pcode2;
+    @FXML
+    private Button btn_addCountry;
+    @FXML
+    private ComboBox<String> cbx_continent;
 
     /**
      * Initializes the controller class.
@@ -85,9 +118,13 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-       
+       this.llenarCombos();
     }    
 
+    
+ // Metodos de añadir a las bases de datos
+    
+    //añdir ciudad
     @FXML
     private void Add_city(ActionEvent event) {
         int Id = 0,population = 0;
@@ -135,42 +172,9 @@ public class HomeController implements Initializable {
         }            
     }
     
-    
-       private boolean showMessages(String mesg, int caso) {
-        Alert msg;
-        boolean ok = false;
-
-        if (caso == 1) {
-            msg = new Alert(Alert.AlertType.ERROR);
-            msg.setTitle("ERROR");
-            msg.setHeaderText(null);
-            msg.setContentText(mesg);
-            msg.showAndWait();
-        }
-        if (caso == 2) {
-            msg = new Alert(Alert.AlertType.INFORMATION);
-            msg.setTitle("INFORMACIÓN");
-            msg.setHeaderText(null);
-            msg.setContentText(mesg);
-            msg.showAndWait();
-        }
-        if (caso == 3) {
-            msg = new Alert(Alert.AlertType.CONFIRMATION);
-            msg.setTitle("PETICIÓN CONFIRMACIÓN");
-            msg.setHeaderText(null);
-            msg.setContentText(mesg);
-            msg.initStyle(StageStyle.UTILITY);
-
-            Optional<ButtonType> result = msg.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                ok = true;
-            }
-        }
-        return ok;
-       }
-
+    //añadir lenguaje
     @FXML
-    private void Add_language(ActionEvent event) throws SQLException {
+    private void Add_language(ActionEvent event){
         float percentage = 0;
         String countrycode,language,porcentaje = "",mesg ,isOfficial;
         boolean esOfficial =false;
@@ -213,9 +217,128 @@ public class HomeController implements Initializable {
                this.txt_Lpercentage.setText("");
                this.chb_Lisofficial.setSelected(false);
            }
-        } catch (NumberFormatException e) {
-            //mesg = "el codigo del pais ya existe, vefifique y vuelva a intentar";
-            //this.showMessages(mesg, 1);
+        } catch (SQLException e) {
+            mesg = "Tanto el codigo del pais como el idioma ya existen juntos, vefifique y vuelva a intentar";
+            this.showMessages(mesg, 1);
         }            
     }
+    
+    // añadir pais
+    @FXML
+    private void Add_country(ActionEvent event) {
+        String code,name,continent,region,superficie,añoIndependencia,poblacion,espectativadevida,gnp,gnpviejo,LocalName,GovernmentForm,HeadOfState,capital,code2,mesg="";
+        float surfaceArea = 0,LifeExpentacy= 0,GNP=0, GNPOld=0;
+        int IndepYear=0,Population=0,Capital=0;
+        
+        
+        //declarar los valores
+        code = this.txt_Pcode.getText();
+        name = this.txt_Pname.getText();
+        region = this.txt_Pregion.getText();
+        LocalName = this.txt_PlocalName.getText();
+        GovernmentForm = this.txt_Pgovernmentform.getText();
+        HeadOfState = this.txt_PheadofState.getText();
+        code2 = this.txt_Pcode2.getText();
+        continent = this.cbx_continent.getSelectionModel().getSelectedItem();
+        
+        espectativadevida = this.txt_lPifeExpentacy.getText();
+        gnp = this.txt_Pganp.getText();
+        gnpviejo = this.txt_PgnpOld.getText();
+        superficie = this.txt_Psurface.getText();
+        añoIndependencia = this.txt_PindepYear.getText();
+        poblacion = this.txt_Ppopulation.getText();
+        capital = this.txt_Pcapital.getText();
+        
+        //validacion de que los cambos sean numericos
+         try {
+            LifeExpentacy = Float.parseFloat(espectativadevida);
+            surfaceArea = Float.parseFloat(superficie);
+            GNP = Float.parseFloat(gnp);
+            GNPOld = Float.parseFloat(gnpviejo);
+            IndepYear = Integer.parseInt(añoIndependencia);
+            Population = Integer.parseInt(poblacion);
+            Capital = Integer.parseInt(capital); 
+            
+        } catch (NumberFormatException e) {
+            mesg = "Uno de los valores no esta en el formato correcto, por favor corregir";
+            this.showMessages(mesg, 1);
+        }
+         
+        
+          try {
+           if (code.equals("") || poblacion.equals("") || region.equals("") || name.equals("") || LocalName.equals("")|| 
+               GovernmentForm.equals("")|| HeadOfState.equals("")|| code2.equals("")|| continent.equals("")|| 
+               espectativadevida.equals("")|| gnp.equals("")|| gnpviejo.equals("")|| superficie.equals("")|| añoIndependencia.equals("")|| capital.equals("")) {
+               mesg = "faltan datos por ingresar";
+               this.showMessages(mesg, 1);
+            } else {
+               String sql = "insert into country (Code,Name,Continent,Region,SurfaceArea,IndepYear,Population,LifeExpectancy,GNP,GNPOld,LocalName,GovernmentForm,HeadOfState,Capital,Code2) values ('"
+               +code+"','" + name + "','" + continent + "','" + region + "','" + surfaceArea + "','" + IndepYear + "','" + Population
+               + "','" + LifeExpentacy+ "','" + GNP+ "','" + GNPOld+ "','" + LocalName+ "','" + GovernmentForm+ "','" + HeadOfState
+               + "','" + Capital + "','" + code2 +"')";
+               
+               PreparedStatement pst = con.prepareStatement(sql);
+               pst.execute();
+               mesg="registro exitoso";
+               this.showMessages(mesg, 2);
+           }
+        } catch (SQLException e) {
+            mesg = "el codigo del pais ya existe, vefifique y vuelva a intentar";
+            this.showMessages(mesg, 1);
+        }            
+    
+         
+         
+    }
+    
+    
+//metodos extra
+    
+    //metodo para mostrar mensajes
+     private boolean showMessages(String mesg, int caso) {
+        Alert msg;
+        boolean ok = false;
+
+        if (caso == 1) {
+            msg = new Alert(Alert.AlertType.ERROR);
+            msg.setTitle("ERROR");
+            msg.setHeaderText(null);
+            msg.setContentText(mesg);
+            msg.showAndWait();
+        }
+        if (caso == 2) {
+            msg = new Alert(Alert.AlertType.INFORMATION);
+            msg.setTitle("INFORMACIÓN");
+            msg.setHeaderText(null);
+            msg.setContentText(mesg);
+            msg.showAndWait();
+        }
+        if (caso == 3) {
+            msg = new Alert(Alert.AlertType.CONFIRMATION);
+            msg.setTitle("PETICIÓN CONFIRMACIÓN");
+            msg.setHeaderText(null);
+            msg.setContentText(mesg);
+            msg.initStyle(StageStyle.UTILITY);
+
+            Optional<ButtonType> result = msg.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                ok = true;
+            }
+        }
+        return ok;
+       }
+
+    //lenar combo box
+     
+     private void llenarCombos(){
+         this.cbx_continent.getItems().clear();
+         
+         this.cbx_continent.getItems().add("Asia");
+         this.cbx_continent.getItems().add("Europe");
+         this.cbx_continent.getItems().add("North America");
+         this.cbx_continent.getItems().add("AFrica");
+         this.cbx_continent.getItems().add("Oceania");
+         this.cbx_continent.getItems().add("Antartica");
+         this.cbx_continent.getItems().add("South America");
+     }
 }
