@@ -68,6 +68,16 @@ public class HomeController implements Initializable {
     private TextField txt_Cpopulation;
     @FXML
     private Button btnINSERTcity;
+    @FXML
+    private CheckBox chb_Lisofficial;
+    @FXML
+    private TextField txt_Lcountrycode;
+    @FXML
+    private TextField txt_Llanguage;
+    @FXML
+    private Button btn_addLanguage;
+    @FXML
+    private TextField txt_Lpercentage;
 
     /**
      * Initializes the controller class.
@@ -79,7 +89,7 @@ public class HomeController implements Initializable {
     }    
 
     @FXML
-    private void Add_city(ActionEvent event) throws SQLException {
+    private void Add_city(ActionEvent event) {
         int Id = 0,population = 0;
         String countrycode,name,district,id = "",poblacion = "",mesg;
         boolean ok =false;
@@ -118,10 +128,10 @@ public class HomeController implements Initializable {
                pst.execute();
                mesg="registro exitoso";
                this.showMessages(mesg, 2);
-            
            }
-        } catch (NumberFormatException e) {
-            
+        } catch (SQLException e) {
+            mesg = "el codigo del pais ya existe, vefifique y vuelva a intentar";
+            this.showMessages(mesg, 1);
         }            
     }
     
@@ -158,4 +168,54 @@ public class HomeController implements Initializable {
         }
         return ok;
        }
+
+    @FXML
+    private void Add_language(ActionEvent event) throws SQLException {
+        float percentage = 0;
+        String countrycode,language,porcentaje = "",mesg ,isOfficial;
+        boolean esOfficial =false;
+        
+        porcentaje = this.txt_Lpercentage.getText();
+        countrycode = this.txt_Lcountrycode.getText();
+        language=this.txt_Llanguage.getText();
+        
+        if (this.chb_Lisofficial.isSelected()) {
+                    esOfficial = true;
+                }
+        
+        if (esOfficial=true){
+            isOfficial = "F";
+        } else{
+            isOfficial = "T";
+        }
+         
+        try {
+            percentage = Float.parseFloat(porcentaje);
+        } catch (NumberFormatException e) {
+            mesg = "Debe ingresar un porcentaje válido";
+            this.showMessages(mesg, 1);
+        }
+         
+        try {
+           if (porcentaje.equals("") || countrycode.equals("") || language.equals("") ) {
+               mesg = "faltan datos por ingresar";
+               this.showMessages(mesg, 1);
+            } else {
+               String sql = "insert into countrylanguage (CountryCode,Language,IsOfficial,Percentage) values ('"+countrycode+"','" + language + "','" + isOfficial + "','" + percentage + "')";
+               
+               PreparedStatement pst = con.prepareStatement(sql);
+               pst.execute();
+               mesg="registro exitoso";
+               this.showMessages(mesg, 2);
+               
+               this.txt_Lcountrycode.setText("");
+               this.txt_Llanguage.setText("");
+               this.txt_Lpercentage.setText("");
+               this.chb_Lisofficial.setSelected(false);
+           }
+        } catch (NumberFormatException e) {
+            //mesg = "el codigo del pais ya existe, vefifique y vuelva a intentar";
+            //this.showMessages(mesg, 1);
+        }            
+    }
 }
