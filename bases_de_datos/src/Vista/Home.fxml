@@ -254,7 +254,54 @@
             </Tab>
             <Tab text="Eliminar">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane prefHeight="659.0" prefWidth="978.0">
+                           <children>
+                              <ImageView fitHeight="168.0" fitWidth="985.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="178.0" fitWidth="548.0" layoutX="202.0" layoutY="451.0" pickOnBounds="true" preserveRatio="true" />
+                              <Pane layoutX="35.0" layoutY="180.0" prefHeight="255.0" prefWidth="269.0" style="-fx-border-color: #FFFFFF;">
+                                 <children>
+                                    <Label layoutX="23.0" layoutY="66.0" text="Codigo del pais:" textFill="#f2f2f2" />
+                                    <TextField fx:id="txt_EPcode" layoutX="23.0" layoutY="94.0" />
+                                    <Text fill="WHITE" layoutX="44.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Eliminar Pais" wrappingWidth="157.13671875">
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                    </Text>
+                                    <Button fx:id="btn_deleteCountry" layoutX="38.0" layoutY="158.0" mnemonicParsing="false" onAction="#Delete_Country" prefHeight="49.0" prefWidth="170.0" text="Eliminar" />
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="355.0" layoutY="180.0" prefHeight="255.0" prefWidth="269.0" style="-fx-border-color: #FFFFFF;">
+                                 <children>
+                                    <Label layoutX="23.0" layoutY="67.0" text="ID de la ciudad:" textFill="#f2f2f2" />
+                                    <TextField fx:id="txt_ECid" layoutX="23.0" layoutY="93.0" />
+                                    <Text fill="WHITE" layoutX="23.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Eliminar Ciudad" wrappingWidth="206.13671875">
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                    </Text>
+                                    <Button fx:id="btn_DeleteCity" layoutX="41.0" layoutY="156.0" mnemonicParsing="false" onAction="#Delete_City" prefHeight="49.0" prefWidth="170.0" text="Eliminar" />
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="662.0" layoutY="180.0" prefHeight="255.0" prefWidth="269.0" style="-fx-border-color: #FFFFFF;">
+                                 <children>
+                                    <Label layoutX="41.0" layoutY="58.0" text="Codigo del pais:" textFill="#f2f2f2" />
+                                    <Label layoutX="41.0" layoutY="121.0" text="Lenguaje:" textFill="#f2f2f2" />
+                                    <TextField fx:id="txt_ELcode" layoutX="41.0" layoutY="85.0" />
+                                    <TextField fx:id="txt_ELlanguage" layoutX="41.0" layoutY="147.0" />
+                                    <Text fill="WHITE" layoutX="49.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Eliminar Lenguaje" wrappingWidth="206.13671875">
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                    </Text>
+                                    <Button fx:id="btn_DeleteLanguage" layoutX="50.0" layoutY="190.0" mnemonicParsing="false" onAction="#Delete_Laguage" prefHeight="40.0" prefWidth="170.0" text="Eliminar" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
               </content>
             </Tab>
         </tabs>

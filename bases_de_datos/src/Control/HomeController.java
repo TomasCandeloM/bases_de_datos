@@ -111,6 +111,20 @@ public class HomeController implements Initializable {
     private Button btn_addCountry;
     @FXML
     private ComboBox<String> cbx_continent;
+    @FXML
+    private TextField txt_EPcode;
+    @FXML
+    private Button btn_deleteCountry;
+    @FXML
+    private TextField txt_ECid;
+    @FXML
+    private Button btn_DeleteCity;
+    @FXML
+    private TextField txt_ELcode;
+    @FXML
+    private TextField txt_ELlanguage;
+    @FXML
+    private Button btn_DeleteLanguage;
 
     /**
      * Initializes the controller class.
@@ -291,7 +305,23 @@ public class HomeController implements Initializable {
          
     }
     
+// Metodos de eliminar datos
     
+    //eliminar Pais
+    @FXML
+    private void Delete_Country(ActionEvent event) {
+    }
+
+    //Eliminar Ciudad
+    @FXML
+    private void Delete_City(ActionEvent event) {
+    }
+
+    //Eliminar Lenguaje
+    @FXML
+    private void Delete_Laguage(ActionEvent event) {
+    }
+
 //metodos extra
     
     //metodo para mostrar mensajes
@@ -341,4 +371,16 @@ public class HomeController implements Initializable {
          this.cbx_continent.getItems().add("Antartica");
          this.cbx_continent.getItems().add("South America");
      }
+
+    @FXML
+    private void Delete_Country(ActionEvent event) {
+    }
+
+    @FXML
+    private void Delete_City(ActionEvent event) {
+    }
+
+    @FXML
+    private void Delete_Laguage(ActionEvent event) {
+    }
 }
