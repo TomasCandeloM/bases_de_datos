@@ -309,17 +309,94 @@ public class HomeController implements Initializable {
     
     //eliminar Pais
     @FXML
-    private void Delete_Country(ActionEvent event) {
+    private void Delete_Country(ActionEvent event){
+        String code,mesg;
+        boolean ok;
+        
+        code = this.txt_EPcode.getText();   
+        
+        try {
+           if (code.equals("")) {
+               mesg = "codigo del pais no ingresado";
+               this.showMessages(mesg, 1);
+            } else {
+               mesg="Confirma que desea eliminar el pais?";
+               ok = this.showMessages(mesg, 3);
+               
+               if (ok) {
+               String sql = "delete from country where code like '%" + code + "%'";
+               PreparedStatement pst = con.prepareStatement(sql);
+               pst.execute();
+               mesg="Pais eliminado";
+               this.showMessages(mesg, 2);
+               }
+           }
+        } catch (SQLException e) {
+            mesg = "el codigo del pais ya existe, vefifique y vuelva a intentar";
+            this.showMessages(mesg, 1);
+        }             
     }
 
     //Eliminar Ciudad
     @FXML
     private void Delete_City(ActionEvent event) {
+        String ID,mesg;
+        boolean ok;
+        
+        ID = this.txt_ECid.getText();
+        
+        try {
+           if (ID.equals("")) {
+               mesg = "ID de la ciudad no ingresado";
+               this.showMessages(mesg, 1);
+            } else {
+               mesg="Confirma que desea eliminar la ciudad?";
+               ok = this.showMessages(mesg, 3);
+               
+               if (ok) {
+               String sql = "delete from city where id like '%" + ID + "%'";
+               PreparedStatement pst = con.prepareStatement(sql);
+               pst.execute();
+               mesg="Ciudad eliminado";
+               this.showMessages(mesg, 2);
+               }
+           }
+        } catch (SQLException e) {
+            mesg = "el codigo del pais ya existe, vefifique y vuelva a intentar";
+            this.showMessages(mesg, 1);
+        }         
+        
     }
 
     //Eliminar Lenguaje
     @FXML
     private void Delete_Laguage(ActionEvent event) {
+        String CountryCode,language,mesg;
+        boolean ok;
+        
+        CountryCode = this.txt_ELcode.getText();
+        language = this.txt_ELlanguage.getText();
+        
+        try {
+           if (CountryCode.equals("") || language.equals("")) {
+               mesg = "Faltan datos por ingresar";
+               this.showMessages(mesg, 1);
+            } else {
+               mesg="Confirma que desea eliminar el lenguaje?";
+               ok = this.showMessages(mesg, 3);
+               
+               if (ok) {
+               String sql = "delete from countrylanguage where countrycode like '%" + CountryCode + "%' and language like '%" + language + "%'";
+               PreparedStatement pst = con.prepareStatement(sql);
+               pst.execute();
+               mesg="Lenguaje eliminado";
+               this.showMessages(mesg, 2);
+               }
+           }
+        } catch (SQLException e) {
+            mesg = "el codigo del pais ya existe, vefifique y vuelva a intentar";
+            this.showMessages(mesg, 1);
+        }         
     }
 
 //metodos extra
