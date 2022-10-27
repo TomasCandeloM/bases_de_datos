@@ -372,15 +372,5 @@ public class HomeController implements Initializable {
          this.cbx_continent.getItems().add("South America");
      }
 
-    @FXML
-    private void Delete_Country(ActionEvent event) {
-    }
 
-    @FXML
-    private void Delete_City(ActionEvent event) {
-    }
-
-    @FXML
-    private void Delete_Laguage(ActionEvent event) {
-    }
 }
