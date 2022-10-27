@@ -297,16 +297,134 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Pane prefHeight="659.0" prefWidth="978.0">
+                        <Pane layoutX="-1.0" layoutY="-1.0" prefHeight="617.0" prefWidth="965.0">
                            <children>
-                              <ImageView fitHeight="163.0" fitWidth="1007.0" layoutX="-14.0" pickOnBounds="true">
+                              <Pane layoutX="41.0" layoutY="177.0" prefHeight="212.0" prefWidth="432.0" style="-fx-border-color: #FFFF;">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/EditarCiudad.png" />
+                                       </image></ImageView>
+                                    <TextField layoutX="35.0" layoutY="48.0" prefHeight="25.0" prefWidth="64.0" />
+                                    <TextField layoutX="126.0" layoutY="161.0" />
+                                    <TextField layoutX="269.0" layoutY="48.0" />
+                                    <TextField layoutX="288.0" layoutY="94.0" prefHeight="25.0" prefWidth="130.0" />
+                                    <TextField layoutX="81.0" layoutY="107.0" prefHeight="25.0" prefWidth="100.0" />
+                                    <Text fill="WHITE" layoutX="14.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="41.13671875">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Text>
+                                    <Button layoutX="353.0" layoutY="161.0" mnemonicParsing="false" text="Editar" />
+                                    <Text fill="WHITE" layoutX="14.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" wrappingWidth="59.13671875">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" layoutX="200.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Distrito" wrappingWidth="58.13671875">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" layoutX="210.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Poblacion" wrappingWidth="71.13671875">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" layoutX="13.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo del Pais" wrappingWidth="119.13671875">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="483.0" layoutY="189.0" prefHeight="200.0" prefWidth="472.0" style="-fx-border-color: #FFFF;">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/EditarLenguaje.png" />
+                                       </image>
+                                    </ImageView>
+                                    <TextField layoutX="97.0" layoutY="127.0" prefHeight="25.0" prefWidth="118.0" />
+                                    <TextField layoutX="140.0" layoutY="55.0" prefHeight="25.0" prefWidth="99.0" />
+                                    <Button layoutX="393.0" layoutY="149.0" mnemonicParsing="false" text="Editar" />
+                                    <TextField layoutX="382.0" layoutY="88.0" prefHeight="25.0" prefWidth="69.0" />
+                                    <CheckBox layoutX="382.0" layoutY="62.0" mnemonicParsing="false" text="Es Oficial" textFill="WHITE" />
+                                    <Text fill="WHITE" layoutX="10.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo del Pais" wrappingWidth="127.13671875">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" layoutX="14.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lenguaje" wrappingWidth="69.13671875">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" layoutX="289.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Porcentaje" wrappingWidth="86.13671875">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="41.0" layoutY="417.0" prefHeight="200.0" prefWidth="708.0" style="-fx-border-color: #FFFF;">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/EditarPais.png" />
+                                       </image>
+                                    </ImageView>
+                                    <TextField layoutX="76.0" layoutY="57.0" />
+                                    <TextField layoutX="76.0" layoutY="98.0" />
+                                    <TextField layoutX="608.0" layoutY="97.0" prefHeight="25.0" prefWidth="88.0" />
+                                    <TextField layoutX="623.0" layoutY="59.0" prefWidth="73.0" />
+                                    <TextField layoutX="354.0" layoutY="98.0" />
+                                    <TextField layoutX="85.0" layoutY="148.0" />
+                                    <TextField layoutX="354.0" layoutY="59.0" />
+                                    <Text fill="WHITE" layoutX="14.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo" wrappingWidth="62.13671875">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font></Text>
+                                    <Text fill="WHITE" layoutX="11.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Region" wrappingWidth="62.13671875">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" layoutX="268.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Presidente" wrappingWidth="78.13671875">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" layoutX="514.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Año de independencia" wrappingWidth="105.13671875">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" layoutX="528.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Poblacion" wrappingWidth="76.13671875">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" layoutX="267.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Superficie" wrappingWidth="80.13671875">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" layoutX="11.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Forma de Gobierno" wrappingWidth="74.13671875">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Text>
+                                    <ComboBox layoutX="279.0" layoutY="148.0" prefWidth="150.0" promptText="Continente" />
+                                    <Button layoutX="636.0" layoutY="148.0" mnemonicParsing="false" text="Editar" />
+                                 </children></Pane>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="86.0" prefWidth="978.0">
+                           <children>
+                              <ImageView fitHeight="163.0" fitWidth="998.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../images/titulo%20modificar.jpg" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="497.0" fitWidth="978.0" layoutY="161.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../images/bg-modificar.jpg" />
+                                    <Image url="@../images/Titulo%20EditarDatos.png" />
                                  </image>
                               </ImageView>
                            </children>
