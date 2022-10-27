@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="687.0" prefWidth="978.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.HomeController">
+<AnchorPane id="AnchorPane" prefHeight="687.0" prefWidth="978.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.HomeController">
    <children>
       <TabPane prefHeight="687.0" prefWidth="978.0" style="-fx-background-color: #18314F;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -439,7 +439,10 @@
                      <children>
                         <Pane prefHeight="659.0" prefWidth="978.0">
                            <children>
-                              <ImageView fitHeight="168.0" fitWidth="985.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="168.0" fitWidth="985.0" layoutX="-1.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../images/EliminarTXT.png" />
+                                 </image></ImageView>
                               <ImageView fitHeight="178.0" fitWidth="548.0" layoutX="202.0" layoutY="451.0" pickOnBounds="true" preserveRatio="true" />
                               <Pane layoutX="35.0" layoutY="180.0" prefHeight="255.0" prefWidth="269.0" style="-fx-border-color: #FFFFFF;">
                                  <children>
