@@ -125,6 +125,46 @@ public class HomeController implements Initializable {
     private TextField txt_ELlanguage;
     @FXML
     private Button btn_DeleteLanguage;
+    @FXML
+    private TextField txt_UCid;
+    @FXML
+    private TextField txt_UCcountrycode;
+    @FXML
+    private TextField txt_UCdistrict;
+    @FXML
+    private TextField txt_UCpopulation;
+    @FXML
+    private TextField txt_UCname;
+    @FXML
+    private Button btn_updateCity;
+    @FXML
+    private TextField txt_ULlanguage;
+    @FXML
+    private TextField txt_ULcountrycode;
+    @FXML
+    private Button btn_UpdateLanguage;
+    @FXML
+    private TextField txt_ULpercentage;
+    @FXML
+    private CheckBox chb_ULisofficial;
+    @FXML
+    private TextField txt_UPcode;
+    @FXML
+    private TextField txt_UPregion;
+    @FXML
+    private TextField txt_UPpopulation;
+    @FXML
+    private TextField txt_UPindepYear;
+    @FXML
+    private TextField txt_UPheadOfState;
+    @FXML
+    private TextField txt_UPgovernmentForm;
+    @FXML
+    private TextField txt_UPsurface;
+    @FXML
+    private ComboBox<String> cbx_UPcontinet;
+    @FXML
+    private Button btn_UpdateCountry;
 
     /**
      * Initializes the controller class.
@@ -179,9 +219,16 @@ public class HomeController implements Initializable {
                pst.execute();
                mesg="registro exitoso";
                this.showMessages(mesg, 2);
+               
+               this.txt_Cid.setText("");
+               this.txt_Cpopulation.setText("");
+               this.txt_Ccountrycode.setText("");
+               this.txt_Cname.setText("");
+               this.txt_Cdistrict.setText("");
+               
            }
         } catch (SQLException e) {
-            mesg = "el codigo del pais ya existe, vefifique y vuelva a intentar";
+            mesg = "el codigo del pais ya existe o no ha sido creado, vefique y vuelva a intentar";
             this.showMessages(mesg, 1);
         }            
     }
@@ -232,7 +279,7 @@ public class HomeController implements Initializable {
                this.chb_Lisofficial.setSelected(false);
            }
         } catch (SQLException e) {
-            mesg = "Tanto el codigo del pais como el idioma ya existen juntos, vefifique y vuelva a intentar";
+            mesg = "Tanto el codigo del pais como el idioma ya existen juntos o el pais aun no ha sido creado, vefifique y vuelva a intentar";
             this.showMessages(mesg, 1);
         }            
     }
@@ -295,14 +342,189 @@ public class HomeController implements Initializable {
                pst.execute();
                mesg="registro exitoso";
                this.showMessages(mesg, 2);
+               
+               this.txt_Pcode.setText("");
+               this.txt_Pname.setText("");
+               this.txt_Pregion.setText("");
+               this.txt_PlocalName.setText("");
+               this.txt_Pgovernmentform.setText("");
+               this.txt_PheadofState.setText("");
+               this.txt_Pcode2.setText("");
+               this.txt_lPifeExpentacy.setText("");
+               this.txt_Pganp.setText("");
+               this.txt_PgnpOld.setText("");
+               this.txt_Psurface.setText("");
+               this.txt_PindepYear.setText("");
+               this.txt_Ppopulation.setText("");
+               this.txt_Pcapital.setText("");
+               this.cbx_continent.setValue("");
+               
            }
         } catch (SQLException e) {
-            mesg = "el codigo del pais ya existe, vefifique y vuelva a intentar";
+            mesg = "Error en la actualización, vefifique y vuelva a intentar";
             this.showMessages(mesg, 1);
         }            
     
          
          
+    }
+    
+ // Metodos de editar datos
+    
+    //editar ciudad
+     @FXML
+    private void Update_city(ActionEvent event)  {
+      String id,Name,countryCode,District,poblacion,mesg="";
+      int ID = 0, Population = 0;
+      
+     id = this.txt_UCid.getText();
+     Name = this.txt_UCname.getText();
+     countryCode = this.txt_UCcountrycode.getText();
+     District = this.txt_UCdistrict.getText();
+     poblacion = this.txt_UCpopulation.getText();
+     
+     try {
+            Population = Integer.parseInt(poblacion);
+            ID = Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            mesg = "Debe ingresar un ID o una población válido";
+            this.showMessages(mesg, 1);
+        } 
+     
+     try {
+           if (id.equals("") || countryCode.equals("") || Name.equals("") || District.equals("") || poblacion.equals("") ) {
+               mesg = "faltan datos por ingresar";
+               this.showMessages(mesg, 1);
+            } else {
+               String sql = "update city set Name ='"+ Name + "',CountryCode ='"+ countryCode + "',District ='"+ District + "',Population ='"+ Population +  "' where Id like '%"+ ID +"%'";
+               
+               PreparedStatement pst = con.prepareStatement(sql);
+               
+               pst.execute();
+               mesg="Actualización exitosa";
+               this.showMessages(mesg, 2);
+               
+               this.txt_UCid.setText("");
+               this.txt_UCname.setText("");
+               this.txt_UCcountrycode.setText("");
+               this.txt_UCdistrict.setText("");
+               this.txt_UCpopulation.setText("");
+               
+           }
+        } catch (SQLException e) {
+            mesg = "Error en la actualización, vefifique y vuelva a intentar";
+            this.showMessages(mesg, 1);
+        } 
+    }
+
+    //editar lenguaje
+    @FXML
+    private void Update_Language(ActionEvent event) {
+        String countryCode, Language, porcentaje,IsOfficial,mesg="";
+        float Percentage = 0;
+        boolean EsOfficial=false;
+        
+        countryCode = this.txt_ULcountrycode.getText();
+        Language = this.txt_ULlanguage.getText();
+        porcentaje=this.txt_ULpercentage.getText();
+        
+        if (this.chb_ULisofficial.isSelected()) {
+                    EsOfficial = true;
+                }
+        
+        if (EsOfficial=true){
+            IsOfficial = "F";
+        } else{
+            IsOfficial = "T";
+        }
+        
+        try {
+            Percentage = Float.parseFloat(porcentaje);
+        } catch (NumberFormatException e) {
+            mesg = "Debe ingresar un porcentaje válido";
+            this.showMessages(mesg, 1);
+        }
+        
+        try {
+           if (porcentaje.equals("") || countryCode.equals("") || Language.equals("") ) {
+               mesg = "faltan datos por ingresar";
+               this.showMessages(mesg, 1);
+            } else {
+               String sql = "update countrylanguage set IsOfficial ='"+ IsOfficial + "',Percentage ='"+ Percentage + "' where countrycode like '%"+ countryCode +"%' and language like '%"+ Language +"%'";
+               
+               PreparedStatement pst = con.prepareStatement(sql);
+               
+               pst.execute();
+               mesg="Actualización exitosa";
+               this.showMessages(mesg, 2);
+               
+               this.txt_ULcountrycode.setText("");
+               this.txt_ULlanguage.setText("");
+               this.txt_ULpercentage.setText("");
+               this.chb_ULisofficial.setSelected(false);
+           }
+        } catch (SQLException e) {
+            mesg = "Tanto el codigo del pais como el idioma ya existen juntos, vefifique y vuelva a intentar";
+            this.showMessages(mesg, 1);
+        } 
+        
+    }
+
+    //editar pais
+    @FXML
+    private void Update_Country(ActionEvent event) {
+        String code,Region, GovernmentForm, superficie, HeadOfState, añoindependencia,poblacion,continent, mesg="";
+        float Surface=0;
+        int IndepYear=0, Population=0;
+        
+        code = this.txt_UPcode.getText();
+        Region = this.txt_UPregion.getText();
+        GovernmentForm = this.txt_UPgovernmentForm.getText();
+        superficie = this.txt_UPsurface.getText();
+        HeadOfState = this.txt_UPheadOfState.getText();
+        añoindependencia = this.txt_UPindepYear.getText();
+        poblacion = this.txt_UPpopulation.getText();
+        continent = this.cbx_UPcontinet.getSelectionModel().getSelectedItem();
+        
+        try {
+            Surface = Float.parseFloat(superficie);
+            IndepYear = Integer.parseInt(añoindependencia);
+            Population = Integer.parseInt(poblacion);
+            
+        } catch (NumberFormatException e) {
+            mesg = "Uno de los valores no esta en el formato correcto, por favor corregir";
+            this.showMessages(mesg, 1);
+        }
+        
+        try {
+           if (code.equals("") || Region.equals("") || GovernmentForm.equals("") || superficie.equals("") || HeadOfState.equals("") || añoindependencia.equals("") || poblacion.equals("") || continent.equals("") ) {
+               mesg = "faltan datos por ingresar";
+               this.showMessages(mesg, 1);
+            } else {
+               String sql = "update country set continent ='"+ continent + "',region ='"+ Region + "', SurfaceArea ='"+ Surface + "',IndepYear ='"+ IndepYear + "', Population ='"+ Population + "', GovernmentForm ='"+ GovernmentForm +"',HeadOfState ='"+ HeadOfState + "' where code like '%" +"%'";
+               
+               PreparedStatement pst = con.prepareStatement(sql);
+               pst.execute();
+               
+               mesg="Actualización exitosa";
+               this.showMessages(mesg, 2);
+               
+               this.txt_UPcode.setText("");
+               this.txt_UPregion.setText("");
+               this.txt_UPgovernmentForm.setText("");
+               this.txt_UPsurface.setText("");
+               this.txt_UPheadOfState.setText("");
+               this.txt_UPindepYear.setText("");
+               this.txt_UPpopulation.setText("");
+               this.cbx_UPcontinet.setValue("");
+               
+           }
+        } catch (SQLException e) {
+            mesg = "Error en la actualización, vefifique y vuelva a intentar";
+            this.showMessages(mesg, 1);
+        } 
+        
+        
     }
     
 // Metodos de eliminar datos
@@ -329,10 +551,12 @@ public class HomeController implements Initializable {
                pst.execute();
                mesg="Pais eliminado";
                this.showMessages(mesg, 2);
+               
+               this.txt_EPcode.setText("");
                }
            }
         } catch (SQLException e) {
-            mesg = "el codigo del pais ya existe, vefifique y vuelva a intentar";
+            mesg = "Error en los datos ingresados, verifique e intente de nuevo";
             this.showMessages(mesg, 1);
         }             
     }
@@ -341,9 +565,18 @@ public class HomeController implements Initializable {
     @FXML
     private void Delete_City(ActionEvent event) {
         String ID,mesg;
+        int id=0;
         boolean ok;
         
         ID = this.txt_ECid.getText();
+        
+         try {
+            id = Integer.parseInt(ID);
+        } catch (NumberFormatException e) {
+            mesg = "Debe ingresar un ID válido";
+            this.showMessages(mesg, 1);
+            ok = true;
+        }
         
         try {
            if (ID.equals("")) {
@@ -354,15 +587,17 @@ public class HomeController implements Initializable {
                ok = this.showMessages(mesg, 3);
                
                if (ok) {
-               String sql = "delete from city where id like '%" + ID + "%'";
+               String sql = "delete from city where id like '%" + id + "%'";
                PreparedStatement pst = con.prepareStatement(sql);
                pst.execute();
                mesg="Ciudad eliminado";
                this.showMessages(mesg, 2);
+               this.txt_ECid.setText("");
+               
                }
            }
         } catch (SQLException e) {
-            mesg = "el codigo del pais ya existe, vefifique y vuelva a intentar";
+            mesg = "Error en los datos ingresados, verifique e intente de nuevo";
             this.showMessages(mesg, 1);
         }         
         
@@ -391,10 +626,14 @@ public class HomeController implements Initializable {
                pst.execute();
                mesg="Lenguaje eliminado";
                this.showMessages(mesg, 2);
+               
+               this.txt_ELcode.setText("");
+               this.txt_ELlanguage.setText("");
+               
                }
            }
         } catch (SQLException e) {
-            mesg = "el codigo del pais ya existe, vefifique y vuelva a intentar";
+            mesg = "Error en los datos ingresados, verifique e intente de nuevo";
             this.showMessages(mesg, 1);
         }         
     }
@@ -447,7 +686,16 @@ public class HomeController implements Initializable {
          this.cbx_continent.getItems().add("Oceania");
          this.cbx_continent.getItems().add("Antartica");
          this.cbx_continent.getItems().add("South America");
+         
+         this.cbx_UPcontinet.getItems().clear();
+         this.cbx_UPcontinet.getItems().add("Asia");
+         this.cbx_UPcontinet.getItems().add("Europe");
+         this.cbx_UPcontinet.getItems().add("North America");
+         this.cbx_UPcontinet.getItems().add("Africa");
+         this.cbx_UPcontinet.getItems().add("Oceania");
+         this.cbx_UPcontinet.getItems().add("Antartica");
+         this.cbx_UPcontinet.getItems().add("South America");
      }
 
-
+   
 }
