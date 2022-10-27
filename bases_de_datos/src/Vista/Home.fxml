@@ -137,7 +137,7 @@
                            <children>
                               <ImageView fitHeight="174.0" fitWidth="978.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../images/titulo%20agregar.jpg" />
+                                    <Image url="@../images/titulo%20agregar%20(1).jpg" />
                                  </image>
                               </ImageView>
                               <Pane layoutX="55.0" layoutY="186.0" opacity="0.9" prefHeight="159.0" prefWidth="374.0" style="-fx-background-color: #18314F; -fx-border-color: #FFFFFF;">
