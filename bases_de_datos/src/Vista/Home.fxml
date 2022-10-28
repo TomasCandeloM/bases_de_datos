@@ -125,7 +125,7 @@
                                           <Font name="System Bold" size="10.0" />
                                        </font>
                                     </CheckBox>
-                                    <CheckBox layoutX="9.0" layoutY="123.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="138.0" text="Año de independencia " textAlignment="CENTER" textFill="#157f1f">
+                                    <CheckBox fx:id="cbPIndepyear" layoutX="9.0" layoutY="123.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="138.0" text="Año de independencia " textAlignment="CENTER" textFill="#157f1f">
                                        <font>
                                           <Font name="System Bold" size="10.0" />
                                        </font>

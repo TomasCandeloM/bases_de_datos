@@ -221,6 +221,8 @@ public class HomeController implements Initializable {
     private TableColumn<?, ?> CLpercentage;
     @FXML
     private TableView<?> tbl_busqueda;
+    @FXML
+    private CheckBox cbPIndepyear;
 
     /**
      * Initializes the controller class.
@@ -735,8 +737,8 @@ public class HomeController implements Initializable {
                     this.CLcityPopulation.setVisible(true);
                 }
                 
-                if (this.cbPGovernmentform.isSelected()) {
-                    ListParameters.add("governmentform");
+                if (this.cbPIndepyear.isSelected()) {
+                    ListParameters.add("indepyear");
                     this.CLcityPopulation.setVisible(true);
                 }
 
@@ -755,9 +757,9 @@ public class HomeController implements Initializable {
 			
 		}
                 
-                System.out.println("select " + str + " from countrylanguage where countrycode like '"+code+"%' or language like '"+code+"%';");
+                System.out.println("select " + str + " from country where code like '"+code+"%' or name like '"+code+"%';");
 
-                String sql = "select " + str + " from countrylanguage where countrycode like '"+code+"%' or language like '"+code+"%';";
+                String sql = "select " + str + " from country where code like '"+code+"%' or name like '"+code+"%';";
                 PreparedStatement pst = con.prepareStatement(sql);
                 pst.execute();
                 
