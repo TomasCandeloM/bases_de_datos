@@ -695,6 +695,8 @@ public class HomeController implements Initializable {
 
         String code, mesg;
         boolean ok, plob_City = false, dis_City = false;
+        int i = 0;
+        String str = "";
 
         List<String> ListParameters = new ArrayList<String>();
 
@@ -726,8 +728,18 @@ public class HomeController implements Initializable {
                 if (plob_City = true) {
                     ListParameters.add("poblation");
                 }
+                
+		for (String parameter : ListParameters) {
+                    if (i == ListParameters.size()){
+                        str+= parameter;
+                    }
+                    else{
+                        str+= parameter+",";
+                    }
+			
+		}
 
-                String sql = "select " + ListParameters + " from city where id like '" + code + "%' or name like '" + code + "%'";
+                String sql = "select " + str + " from city where id like '" + code + "%' or name like '" + code + "%'";
                 PreparedStatement pst = con.prepareStatement(sql);
                 pst.execute();
 
