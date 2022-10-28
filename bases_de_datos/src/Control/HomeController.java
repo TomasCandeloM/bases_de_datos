@@ -20,7 +20,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.StageStyle;
 
 /**
@@ -179,6 +181,38 @@ public class HomeController implements Initializable {
     private Button btn_Search_country;
     @FXML
     private Button btn_Search_language;
+    @FXML
+    private TableColumn<?, ?> CLcode;
+    @FXML
+    private TableColumn<?, ?> CLcountryName;
+    @FXML
+    private TableColumn<?, ?> CLcountryPopulation;
+    @FXML
+    private TableColumn<?, ?> CLheadOfState;
+    @FXML
+    private TableColumn<?, ?> CLregion;
+    @FXML
+    private TableColumn<?, ?> CLcontinent;
+    @FXML
+    private TableColumn<?, ?> CLindepYear;
+    @FXML
+    private TableColumn<?, ?> CLsurface;
+    @FXML
+    private TableColumn<?, ?> CLgovernmentForm;
+    @FXML
+    private TableColumn<?, ?> CLid;
+    @FXML
+    private TableColumn<?, ?> CLcityName;
+    @FXML
+    private TableColumn<?, ?> CLcityPopulation;
+    @FXML
+    private TableColumn<?, ?> CLdistrict;
+    @FXML
+    private TableColumn<?, ?> CLlanguage;
+    @FXML
+    private TableColumn<?, ?> CLisOfficial;
+    @FXML
+    private TableColumn<?, ?> CLpercentage;
 
     /**
      * Initializes the controller class.
@@ -186,6 +220,7 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        this.modelarTabla();
        this.llenarCombos();
     }    
 
@@ -651,6 +686,26 @@ public class HomeController implements Initializable {
             this.showMessages(mesg, 1);
         }         
     }
+    
+// metodos de busqueda 
+    
+    //buscar pais
+    @FXML
+    private void Search_country(ActionEvent event) {
+    }
+    
+    // buscar ciudad
+    @FXML
+    private void Search_city(ActionEvent event) {
+    }
+
+    //buscar lenguage
+    @FXML
+    private void Search_language(ActionEvent event) {
+        String mesg,info;
+        
+        
+    }
 
 //metodos extra
     
@@ -723,18 +778,30 @@ public class HomeController implements Initializable {
          this.cbx_Rcountry.getItems().add("Nombre");
          
      }
+     
+     
+     //modelaar tabla
+     
+     private void modelarTabla(){
+         this.CLcode.setCellValueFactory(new PropertyValueFactory("Codigo del Pais"));
+         this.CLcityName.setCellValueFactory(new PropertyValueFactory("Nombre de la ciudad"));
+         this.CLcityPopulation.setCellValueFactory(new PropertyValueFactory("Poblacion de la ciudad"));
+         this.CLcontinent.setCellValueFactory(new PropertyValueFactory("Continente"));
+         this.CLcountryName.setCellValueFactory(new PropertyValueFactory("Nombre del pais"));
+         this.CLcountryPopulation.setCellValueFactory(new PropertyValueFactory("Población del pais"));
+         this.CLdistrict.setCellValueFactory(new PropertyValueFactory("Distrito"));
+         this.CLgovernmentForm.setCellValueFactory(new PropertyValueFactory("Forma de gobierno"));
+         this.CLheadOfState.setCellValueFactory(new PropertyValueFactory("Presidente"));
+         this.CLid.setCellValueFactory(new PropertyValueFactory("Id de la ciudad"));
+         this.CLindepYear.setCellValueFactory(new PropertyValueFactory("año de independencia"));
+         this.CLisOfficial.setCellValueFactory(new PropertyValueFactory("Es oficial?"));
+         this.CLlanguage.setCellValueFactory(new PropertyValueFactory("Lenguaje"));
+         this.CLpercentage.setCellValueFactory(new PropertyValueFactory("Porcentaje"));
+         this.CLregion.setCellValueFactory(new PropertyValueFactory("Region"));
+         this.CLsurface.setCellValueFactory(new PropertyValueFactory("Superficie"));
+     }
 
-    @FXML
-    private void Search_city(ActionEvent event) {
-    }
-
-    @FXML
-    private void Search_country(ActionEvent event) {
-    }
-
-    @FXML
-    private void Search_language(ActionEvent event) {
-    }
+    
 
    
 }
