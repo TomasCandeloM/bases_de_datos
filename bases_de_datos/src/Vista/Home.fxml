@@ -110,6 +110,7 @@
                                           <Font name="System Bold" size="20.0" />
                                        </font>
                                     </Text>
+                                    <Button fx:id="btn_Search_city" layoutX="91.0" layoutY="15.0" mnemonicParsing="false" onAction="#Search_city" prefHeight="25.0" prefWidth="125.0" text="Buscar Ciudad" />
                                  </children>
                               </Pane>
                               <Pane layoutX="13.0" layoutY="138.0" prefHeight="155.0" prefWidth="342.0" style="-fx-border-color: #FFFFFF;">
@@ -156,6 +157,7 @@
                                           <Font name="System Bold" size="20.0" />
                                        </font>
                                     </Text>
+                                    <Button fx:id="btn_Search_country" layoutX="86.0" layoutY="15.0" mnemonicParsing="false" onAction="#Search_country" prefHeight="25.0" prefWidth="125.0" text="Button Pais" />
                                  </children>
                               </Pane>
                               <Pane layoutX="14.0" layoutY="452.0" prefHeight="123.0" prefWidth="340.0" style="-fx-border-color: #FFFFFF;">
@@ -177,9 +179,10 @@
                                           <Font name="System Bold" size="10.0" />
                                        </font>
                                     </CheckBox>
+                                    <Button fx:id="btn_Search_language" layoutX="118.0" layoutY="8.0" mnemonicParsing="false" onAction="#Search_language" prefHeight="25.0" prefWidth="125.0" text="Buscar Lenguaje" />
                                  </children>
                               </Pane>
-                              <TableView layoutX="231.0" layoutY="129.0" prefHeight="487.0" prefWidth="705.0">
+                              <TableView layoutX="378.0" layoutY="129.0" prefHeight="487.0" prefWidth="587.0">
                                 <columns>
                                   <TableColumn prefWidth="75.0" text="C1" />
                                   <TableColumn prefWidth="75.0" text="C2" />

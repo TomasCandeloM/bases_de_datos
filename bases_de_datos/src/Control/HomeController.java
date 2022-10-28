@@ -44,8 +44,6 @@ public class HomeController implements Initializable {
     @FXML
     private CheckBox cbPGovernmentform;
     @FXML
-    private CheckBox cbCcountrycode;
-    @FXML
     private CheckBox cbCpopulation1;
     @FXML
     private CheckBox cbCdistrict;
@@ -175,6 +173,12 @@ public class HomeController implements Initializable {
     private TextField txt_Rcountryinfo;
     @FXML
     private TextField txt_countryLanguageinfo;
+    @FXML
+    private Button btn_Search_city;
+    @FXML
+    private Button btn_Search_country;
+    @FXML
+    private Button btn_Search_language;
 
     /**
      * Initializes the controller class.
@@ -719,6 +723,18 @@ public class HomeController implements Initializable {
          this.cbx_Rcountry.getItems().add("Nombre");
          
      }
+
+    @FXML
+    private void Search_city(ActionEvent event) {
+    }
+
+    @FXML
+    private void Search_country(ActionEvent event) {
+    }
+
+    @FXML
+    private void Search_language(ActionEvent event) {
+    }
 
    
 }
