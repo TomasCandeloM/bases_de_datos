@@ -689,7 +689,85 @@ public class HomeController implements Initializable {
 // metodos de busqueda 
     //buscar pais
     @FXML
-    private void Search_country(ActionEvent event) {
+    private void Search_country(ActionEvent event)throws SQLException {
+        String code, mesg;
+        boolean ok;
+        int i = 0;
+        String str = "";
+
+        List<String> ListParameters = new ArrayList<String>();
+
+        code = this.txt_Rcountryinfo.getText();
+        
+        try {
+            if (code.equals("")) {
+                mesg = "No deje el campo en blanco";
+                this.showMessages(mesg, 1);
+            } else {
+                
+                this.CLcityName.setVisible(true);
+                this.CLid.setVisible(true);
+                
+                 ListParameters.add("code, name");
+
+                if (this.cbPpopulation.isSelected()) {
+                    ListParameters.add("population");
+                    this.CLdistrict.setVisible(true);
+                }
+
+                if (this.cbPheadofstate.isSelected()) {
+                    ListParameters.add("headofstate");
+                    this.CLcityPopulation.setVisible(true);
+                }
+                
+                if (this.cbPContinent.isSelected()) {
+                    ListParameters.add("continent");
+                    this.CLcityPopulation.setVisible(true);
+                }
+                
+                if (this.cbPSurfacearea.isSelected()) {
+                    ListParameters.add("surfacearea");
+                    this.CLcityPopulation.setVisible(true);
+                }
+                
+                if (this.cbPGovernmentform.isSelected()) {
+                    ListParameters.add("governmentform");
+                    this.CLcityPopulation.setVisible(true);
+                }
+                
+                if (this.cbPGovernmentform.isSelected()) {
+                    ListParameters.add("governmentform");
+                    this.CLcityPopulation.setVisible(true);
+                }
+
+		for (String parameter : ListParameters) {
+                    System.out.println("Indice "+i + " Cadena "+str);
+                    if(i == 0){
+                        str+= parameter;
+                        i++;
+                    }
+                    else if (i-1 != ListParameters.size()){
+                        str+= "," + parameter;
+                        i++;
+                    }
+                    
+                    
+			
+		}
+                
+                System.out.println("select " + str + " from countrylanguage where countrycode like '"+code+"%' or language like '"+code+"%';");
+
+                String sql = "select " + str + " from countrylanguage where countrycode like '"+code+"%' or language like '"+code+"%';";
+                PreparedStatement pst = con.prepareStatement(sql);
+                pst.execute();
+                
+
+                this.txt_cityinfo.setText("");
+            }
+        } catch (NumberFormatException e) {
+            //mesg = "Error en los datos ingresados, verifique e intente de nuevo";
+            //this.showMessages(mesg, 1);
+        }
     }
 
     // buscar ciudad
