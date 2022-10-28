@@ -5,6 +5,7 @@
 package Control;
 
 import Gestion.Conexion;
+import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Connection;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,6 +29,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.StageStyle;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * FXML Controller class
@@ -691,16 +694,18 @@ public class HomeController implements Initializable {
 
     // buscar ciudad
     @FXML
-    private void Search_city(ActionEvent event) {
+    private void Search_city(ActionEvent event) throws SQLException {
 
         String code, mesg;
-        boolean ok, plob_City = false, dis_City = false;
+        boolean ok;
         int i = 0;
         String str = "";
 
         List<String> ListParameters = new ArrayList<String>();
+        
 
         code = this.txt_cityinfo.getText();
+        
         try {
             if (code.equals("")) {
                 mesg = "No deje el campo en blanco";
@@ -709,86 +714,114 @@ public class HomeController implements Initializable {
                 
                 this.CLcityName.setVisible(true);
                 this.CLid.setVisible(true);
+                
+                 ListParameters.add("id, name");
 
                 if (this.cbCdistrict.isSelected()) {
-                    dis_City = true;
+                    ListParameters.add("district");
                     this.CLdistrict.setVisible(true);
                 }
 
                 if (this.cbCpopulation1.isSelected()) {
-                    plob_City = true;
+                    ListParameters.add("population");
                     this.CLcityPopulation.setVisible(true);
                 }
 
-                ListParameters.add("id, name");
-
-                if (dis_City = true) {
-                    ListParameters.add("district");
-                }
-                if (plob_City = true) {
-                    ListParameters.add("poblation");
-                }
-                
 		for (String parameter : ListParameters) {
-                    if (i == ListParameters.size()){
+                    System.out.println("Indice "+i + " Cadena "+str);
+                    if(i == 0){
                         str+= parameter;
+                        i++;
                     }
-                    else{
-                        str+= parameter+",";
+                    else if (i-1 != ListParameters.size()){
+                        str+= "," + parameter;
+                        i++;
                     }
+                    
+                    
 			
 		}
+                
+                System.out.println("select " + str + " from city where id like '"+code+"%' or name like '"+code+"%';");
 
-                String sql = "select " + str + " from city where id like '" + code + "%' or name like '" + code + "%'";
+                String sql = "select " + str + " from city where id like '"+code+"%' or name like '"+code+"%';";
                 PreparedStatement pst = con.prepareStatement(sql);
                 pst.execute();
+                
+                
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                
 
                 this.txt_cityinfo.setText("");
             }
-        } catch (SQLException e) {
-            mesg = "Error en los datos ingresados, verifique e intente de nuevo";
-            this.showMessages(mesg, 1);
+        } catch (NumberFormatException e) {
+            //mesg = "Error en los datos ingresados, verifique e intente de nuevo";
+            //this.showMessages(mesg, 1);
         }
     }
 
     //buscar lenguage
     @FXML
-    private void Search_language(ActionEvent event) {String mesg,info, code;
-        
-        boolean ok,Iso_Lan,por_Lan;
-        
+    private void Search_language(ActionEvent event)throws SQLException {
+        String code, mesg;
+        boolean ok;
+        int i = 0;
+        String str = "";
+
         List<String> ListParameters = new ArrayList<String>();
-        
+
         code = this.txt_countryLanguageinfo.getText();
-        por_Lan = this.cbLlanguage.isSelected();
-        Iso_Lan = this.cbLisoficial.isSelected();
         
         try {
-           if (code.equals("")) {
-               mesg = "No deje el campo en blanco";
-               this.showMessages(mesg, 1);
-            } else{
-               
-               ListParameters.add("CountryCode, Language");
-               
-               if (por_Lan = true){
-                   ListParameters.add("IsOfficial");
-               } 
-               if (Iso_Lan = true){
-                   ListParameters.add("Percentage");
-               }
-               
-               String sql = "select "+ListParameters+" from countrylanguage where countrycode like '"+code+"%' or language like '"+code+"%'";
-               PreparedStatement pst = con.prepareStatement(sql);
-               pst.execute();
-               
-               this.txt_countryLanguageinfo.setText("");
-           }
-        } catch (SQLException e) {
-            mesg = "Error en los datos ingresados, verifique e intente de nuevo";
-            this.showMessages(mesg, 1);
-        }
+            if (code.equals("")) {
+                mesg = "No deje el campo en blanco";
+                this.showMessages(mesg, 1);
+            } else {
+                
+                this.CLcityName.setVisible(true);
+                this.CLid.setVisible(true);
+                
+                 ListParameters.add("countrycode, language");
 
+                if (this.cbLlanguage.isSelected()) {
+                    ListParameters.add("percentage");
+                    this.CLdistrict.setVisible(true);
+                }
+
+                if (this.cbLisoficial.isSelected()) {
+                    ListParameters.add("isofficial");
+                    this.CLcityPopulation.setVisible(true);
+                }
+
+		for (String parameter : ListParameters) {
+                    System.out.println("Indice "+i + " Cadena "+str);
+                    if(i == 0){
+                        str+= parameter;
+                        i++;
+                    }
+                    else if (i-1 != ListParameters.size()){
+                        str+= "," + parameter;
+                        i++;
+                    }
+                    
+                    
+			
+		}
+                
+                System.out.println("select " + str + " from countrylanguage where countrycode like '"+code+"%' or language like '"+code+"%';");
+
+                String sql = "select " + str + " from countrylanguage where countrycode like '"+code+"%' or language like '"+code+"%';";
+                PreparedStatement pst = con.prepareStatement(sql);
+                pst.execute();
+                
+
+                this.txt_cityinfo.setText("");
+            }
+        } catch (NumberFormatException e) {
+            //mesg = "Error en los datos ingresados, verifique e intente de nuevo";
+            //this.showMessages(mesg, 1);
+        }
     }
 
 //metodos extra
