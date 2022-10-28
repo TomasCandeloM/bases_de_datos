@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.Connection;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -697,6 +699,41 @@ public class HomeController implements Initializable {
     // buscar ciudad
     @FXML
     private void Search_city(ActionEvent event) {
+        
+        String code,mesg;
+        boolean ok,plob_City,dis_City;
+        
+        List<String> ListParameters = new ArrayList<String>();
+        
+        code = this.txt_cityinfo.getText();
+        plob_City = this.cbCpopulation1.isSelected();
+        dis_City = this.cbCdistrict.isSelected();
+        
+        try {
+           if (code.equals("")) {
+               mesg = "No deje el campo en blanco";
+               this.showMessages(mesg, 1);
+            } else{
+               
+               ListParameters.add("id, name");
+               
+               if (dis_City = true){
+                   ListParameters.add("district");
+               } 
+               if (plob_City = true){
+                   ListParameters.add("poblation");
+               }
+               
+               String sql = "select "+ListParameters+" from city where id like '"+code+"%' or name like '"+code+"%'";
+               PreparedStatement pst = con.prepareStatement(sql);
+               pst.execute();
+               
+               this.txt_cityinfo.setText("");
+           }
+        } catch (SQLException e) {
+            mesg = "Error en los datos ingresados, verifique e intente de nuevo";
+            this.showMessages(mesg, 1);
+        } 
     }
 
     //buscar lenguage
