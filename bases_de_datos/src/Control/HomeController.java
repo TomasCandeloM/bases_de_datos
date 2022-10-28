@@ -44,8 +44,6 @@ public class HomeController implements Initializable {
     @FXML
     private CheckBox cbPGovernmentform;
     @FXML
-    private CheckBox cbPSurfacearea1;
-    @FXML
     private CheckBox cbCcountrycode;
     @FXML
     private CheckBox cbCpopulation1;
@@ -165,6 +163,18 @@ public class HomeController implements Initializable {
     private ComboBox<String> cbx_UPcontinet;
     @FXML
     private Button btn_UpdateCountry;
+    @FXML
+    private ComboBox<String> cbx_Rcity;
+    @FXML
+    private ComboBox<String> cbx_Rcountry;
+    @FXML
+    private ComboBox<String> cbx_Rlanguage;
+    @FXML
+    private TextField txt_cityinfo;
+    @FXML
+    private TextField txt_Rcountryinfo;
+    @FXML
+    private TextField txt_countryLanguageinfo;
 
     /**
      * Initializes the controller class.
@@ -695,6 +705,19 @@ public class HomeController implements Initializable {
          this.cbx_UPcontinet.getItems().add("Oceania");
          this.cbx_UPcontinet.getItems().add("Antartica");
          this.cbx_UPcontinet.getItems().add("South America");
+         
+         this.cbx_Rlanguage.getItems().clear();
+         this.cbx_Rlanguage.getItems().add("Codigo del pais");
+         this.cbx_Rlanguage.getItems().add("Idioma");
+         
+         this.cbx_Rcity.getItems().clear();
+         this.cbx_Rcity.getItems().add("Id");
+         this.cbx_Rcity.getItems().add("Nombre");
+         
+         this.cbx_Rcountry.getItems().clear();
+         this.cbx_Rcountry.getItems().add("Codigo");
+         this.cbx_Rcountry.getItems().add("Nombre");
+         
      }
 
    

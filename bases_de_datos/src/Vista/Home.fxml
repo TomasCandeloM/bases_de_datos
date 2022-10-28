@@ -7,6 +7,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -88,21 +90,17 @@
                      <children>
                         <Pane prefHeight="659.0" prefWidth="978.0" style="-fx-background-color: #18314F;">
                            <children>
-                              <Pane layoutX="15.0" layoutY="261.0" prefHeight="137.0" prefWidth="341.0">
+                              <ImageView fitHeight="126.0" fitWidth="978.0" pickOnBounds="true" preserveRatio="true" />
+                              <Pane layoutX="14.0" layoutY="304.0" prefHeight="137.0" prefWidth="333.0" style="-fx-border-color: #FFFFFF;">
                                  <children>
-                                    <ComboBox layoutX="3.0" layoutY="56.0" prefHeight="25.0" prefWidth="88.0" />
-                                    <TextField layoutX="113.0" layoutY="56.0" prefHeight="25.0" prefWidth="196.0" />
-                                    <CheckBox fx:id="cbCcountrycode" layoutX="91.0" layoutY="97.0" mnemonicParsing="false" text="Codigo del pais " textAlignment="CENTER" textFill="#157f1f">
+                                    <ComboBox fx:id="cbx_Rcity" layoutX="14.0" layoutY="56.0" prefHeight="25.0" prefWidth="88.0" />
+                                    <TextField fx:id="txt_cityinfo" layoutX="113.0" layoutY="56.0" prefHeight="25.0" prefWidth="196.0" />
+                                    <CheckBox fx:id="cbCpopulation1" layoutX="58.0" layoutY="97.0" mnemonicParsing="false" text="Población" textAlignment="CENTER" textFill="#157f1f">
                                        <font>
                                           <Font name="System Bold" size="10.0" />
                                        </font>
                                     </CheckBox>
-                                    <CheckBox fx:id="cbCpopulation1" layoutX="14.0" layoutY="97.0" mnemonicParsing="false" text="Población" textAlignment="CENTER" textFill="#157f1f">
-                                       <font>
-                                          <Font name="System Bold" size="10.0" />
-                                       </font>
-                                    </CheckBox>
-                                    <CheckBox fx:id="cbCdistrict" layoutX="201.0" layoutY="97.0" mnemonicParsing="false" text="Distrito" textAlignment="CENTER" textFill="#157f1f">
+                                    <CheckBox fx:id="cbCdistrict" layoutX="167.0" layoutY="97.0" mnemonicParsing="false" text="Distrito" textAlignment="CENTER" textFill="#157f1f">
                                        <font>
                                           <Font name="System Bold" size="10.0" />
                                        </font>
@@ -114,14 +112,14 @@
                                     </Text>
                                  </children>
                               </Pane>
-                              <Pane layoutX="18.0" layoutY="81.0" prefHeight="185.0" prefWidth="334.0">
+                              <Pane layoutX="13.0" layoutY="138.0" prefHeight="155.0" prefWidth="342.0" style="-fx-border-color: #FFFFFF;">
                                  <children>
-                                    <CheckBox fx:id="cbPRegion" layoutX="248.0" layoutY="127.0" mnemonicParsing="false" text="Region" textAlignment="CENTER" textFill="#157f1f">
+                                    <CheckBox fx:id="cbPRegion" layoutX="185.0" layoutY="91.0" mnemonicParsing="false" text="Region" textAlignment="CENTER" textFill="#157f1f">
                                        <font>
                                           <Font name="System Bold" size="10.0" />
                                        </font>
                                     </CheckBox>
-                                    <CheckBox fx:id="cbPSurfacearea" layoutX="152.0" layoutY="127.0" mnemonicParsing="false" text="Superficie" textAlignment="CENTER" textFill="#157f1f">
+                                    <CheckBox fx:id="cbPSurfacearea" layoutX="147.0" layoutY="127.0" mnemonicParsing="false" text="Superficie" textAlignment="CENTER" textFill="#157f1f">
                                        <font>
                                           <Font name="System Bold" size="10.0" />
                                        </font>
@@ -136,12 +134,7 @@
                                           <Font name="System Bold" size="10.0" />
                                        </font>
                                     </CheckBox>
-                                    <CheckBox fx:id="cbPGovernmentform" layoutX="91.0" layoutY="158.0" mnemonicParsing="false" text="Forma de gobierno " textAlignment="CENTER" textFill="#157f1f">
-                                       <font>
-                                          <Font name="System Bold" size="10.0" />
-                                       </font>
-                                    </CheckBox>
-                                    <CheckBox fx:id="cbPSurfacearea1" layoutX="185.0" layoutY="91.0" mnemonicParsing="false" text="Capital" textAlignment="CENTER" textFill="#157f1f">
+                                    <CheckBox fx:id="cbPGovernmentform" layoutX="221.0" layoutY="127.0" mnemonicParsing="false" text="Forma de gobierno " textAlignment="CENTER" textFill="#157f1f">
                                        <font>
                                           <Font name="System Bold" size="10.0" />
                                        </font>
@@ -151,8 +144,8 @@
                                           <Font name="System Bold" size="10.0" />
                                        </font>
                                     </CheckBox>
-                                    <ComboBox layoutX="14.0" layoutY="50.0" prefHeight="25.0" prefWidth="88.0" />
-                                    <TextField layoutX="123.0" layoutY="50.0" prefHeight="25.0" prefWidth="196.0" />
+                                    <ComboBox fx:id="cbx_Rcountry" layoutX="14.0" layoutY="50.0" prefHeight="25.0" prefWidth="88.0" />
+                                    <TextField fx:id="txt_Rcountryinfo" layoutX="123.0" layoutY="50.0" prefHeight="25.0" prefWidth="196.0" />
                                     <CheckBox fx:id="cbPpopulation" layoutX="12.0" layoutY="91.0" mnemonicParsing="false" text="Población" textAlignment="CENTER" textFill="#157f1f">
                                        <font>
                                           <Font name="System Bold" size="10.0" />
@@ -165,27 +158,38 @@
                                     </Text>
                                  </children>
                               </Pane>
-                              <Pane layoutX="18.0" layoutY="398.0" prefHeight="123.0" prefWidth="334.0">
+                              <Pane layoutX="14.0" layoutY="452.0" prefHeight="123.0" prefWidth="340.0" style="-fx-border-color: #FFFFFF;">
                                  <children>
-                                    <Text fill="#4cb963" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lenguaje" wrappingWidth="88.0">
+                                    <Text fill="#4cb963" layoutX="14.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lenguaje" wrappingWidth="88.0">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
                                        </font>
                                     </Text>
-                                    <ComboBox layoutY="42.0" prefHeight="25.0" prefWidth="88.0" />
-                                    <TextField layoutX="110.0" layoutY="42.0" prefHeight="25.0" prefWidth="196.0" />
-                                    <CheckBox fx:id="cbLlanguage" layoutX="14.0" layoutY="86.0" mnemonicParsing="false" text="Porcentaje" textAlignment="CENTER" textFill="#157f1f">
+                                    <ComboBox fx:id="cbx_Rlanguage" layoutX="14.0" layoutY="42.0" prefHeight="25.0" prefWidth="88.0" />
+                                    <TextField fx:id="txt_countryLanguageinfo" layoutX="118.0" layoutY="42.0" prefHeight="25.0" prefWidth="196.0" />
+                                    <CheckBox fx:id="cbLlanguage" layoutX="47.0" layoutY="86.0" mnemonicParsing="false" text="Porcentaje" textAlignment="CENTER" textFill="#157f1f">
                                        <font>
                                           <Font name="System Bold" size="10.0" />
                                        </font>
                                     </CheckBox>
-                                    <CheckBox fx:id="cbLisoficial" layoutX="130.0" layoutY="86.0" mnemonicParsing="false" text="EsOficial" textAlignment="CENTER" textFill="#157f1f">
+                                    <CheckBox fx:id="cbLisoficial" layoutX="170.0" layoutY="86.0" mnemonicParsing="false" text="EsOficial" textAlignment="CENTER" textFill="#157f1f">
                                        <font>
                                           <Font name="System Bold" size="10.0" />
                                        </font>
                                     </CheckBox>
                                  </children>
                               </Pane>
+                              <TableView layoutX="231.0" layoutY="129.0" prefHeight="487.0" prefWidth="705.0">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="C1" />
+                                  <TableColumn prefWidth="75.0" text="C2" />
+                                    <TableColumn prefWidth="75.0" text="Column X" />
+                                    <TableColumn prefWidth="75.0" text="Column X" />
+                                    <TableColumn prefWidth="75.0" text="Column X" />
+                                    <TableColumn prefWidth="75.0" text="Column X" />
+                                    <TableColumn prefWidth="75.0" text="Column X" />
+                                </columns>
+                              </TableView>
                            </children>
                         </Pane>
                      </children>
