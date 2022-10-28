@@ -741,8 +741,41 @@ public class HomeController implements Initializable {
 
     //buscar lenguage
     @FXML
-    private void Search_language(ActionEvent event) {
-        String mesg, info;
+    private void Search_language(ActionEvent event) {String mesg,info, code;
+        
+        boolean ok,Iso_Lan,por_Lan;
+        
+        List<String> ListParameters = new ArrayList<String>();
+        
+        code = this.txt_countryLanguageinfo.getText();
+        por_Lan = this.cbLlanguage.isSelected();
+        Iso_Lan = this.cbLisoficial.isSelected();
+        
+        try {
+           if (code.equals("")) {
+               mesg = "No deje el campo en blanco";
+               this.showMessages(mesg, 1);
+            } else{
+               
+               ListParameters.add("CountryCode, Language");
+               
+               if (por_Lan = true){
+                   ListParameters.add("IsOfficial");
+               } 
+               if (Iso_Lan = true){
+                   ListParameters.add("Percentage");
+               }
+               
+               String sql = "select "+ListParameters+" from countrylanguage where countrycode like '"+code+"%' or language like '"+code+"%'";
+               PreparedStatement pst = con.prepareStatement(sql);
+               pst.execute();
+               
+               this.txt_countryLanguageinfo.setText("");
+           }
+        } catch (SQLException e) {
+            mesg = "Error en los datos ingresados, verifique e intente de nuevo";
+            this.showMessages(mesg, 1);
+        }
 
     }
 
