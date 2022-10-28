@@ -707,39 +707,44 @@ public class HomeController implements Initializable {
                 this.showMessages(mesg, 1);
             } else {
                 
-                this.CLcityName.setVisible(true);
-                this.CLid.setVisible(true);
+                this.CLcode.setVisible(true);
+                this.CLcountryName.setVisible(true);
                 
                  ListParameters.add("code, name");
 
                 if (this.cbPpopulation.isSelected()) {
                     ListParameters.add("population");
-                    this.CLdistrict.setVisible(true);
+                    this.CLcountryPopulation.setVisible(true);
                 }
 
                 if (this.cbPheadofstate.isSelected()) {
                     ListParameters.add("headofstate");
-                    this.CLcityPopulation.setVisible(true);
+                    this.CLheadOfState.setVisible(true);
+                }
+                
+                 if (this.cbPRegion.isSelected()) {
+                    ListParameters.add("headofstate");
+                    this.CLregion.setVisible(true);
                 }
                 
                 if (this.cbPContinent.isSelected()) {
                     ListParameters.add("continent");
-                    this.CLcityPopulation.setVisible(true);
+                    this.CLcontinent.setVisible(true);
                 }
                 
                 if (this.cbPSurfacearea.isSelected()) {
                     ListParameters.add("surfacearea");
-                    this.CLcityPopulation.setVisible(true);
+                    this.CLsurface.setVisible(true);
                 }
                 
                 if (this.cbPGovernmentform.isSelected()) {
                     ListParameters.add("governmentform");
-                    this.CLcityPopulation.setVisible(true);
+                    this.CLgovernmentForm.setVisible(true);
                 }
                 
                 if (this.cbPIndepyear.isSelected()) {
                     ListParameters.add("indepyear");
-                    this.CLcityPopulation.setVisible(true);
+                    this.CLindepYear.setVisible(true);
                 }
 
 		for (String parameter : ListParameters) {
@@ -859,19 +864,19 @@ public class HomeController implements Initializable {
                 this.showMessages(mesg, 1);
             } else {
                 
-                this.CLcityName.setVisible(true);
-                this.CLid.setVisible(true);
+                this.CLcode.setVisible(true);
+                this.CLlanguage.setVisible(true);
                 
                  ListParameters.add("countrycode, language");
 
                 if (this.cbLlanguage.isSelected()) {
                     ListParameters.add("percentage");
-                    this.CLdistrict.setVisible(true);
+                    this.CLpercentage.setVisible(true);
                 }
 
                 if (this.cbLisoficial.isSelected()) {
                     ListParameters.add("isofficial");
-                    this.CLcityPopulation.setVisible(true);
+                    this.CLisOfficial.setVisible(true);
                 }
 
 		for (String parameter : ListParameters) {
