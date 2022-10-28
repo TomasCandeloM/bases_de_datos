@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="687.0" prefWidth="978.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.HomeController">
+<AnchorPane id="AnchorPane" prefHeight="687.0" prefWidth="978.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.HomeController">
    <children>
       <TabPane prefHeight="687.0" prefWidth="978.0" style="-fx-background-color: #18314F;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -182,7 +182,7 @@
                                     <Button fx:id="btn_Search_language" layoutX="118.0" layoutY="8.0" mnemonicParsing="false" onAction="#Search_language" prefHeight="25.0" prefWidth="125.0" text="Buscar Lenguaje" />
                                  </children>
                               </Pane>
-                              <TableView layoutX="378.0" layoutY="129.0" prefHeight="487.0" prefWidth="587.0">
+                              <TableView fx:id="tbl_busqueda" layoutX="378.0" layoutY="129.0" prefHeight="487.0" prefWidth="587.0">
                                 <columns>
                                   <TableColumn fx:id="CLcode" prefWidth="75.0" text="Codigo Pais" visible="false" />
                                   <TableColumn fx:id="CLcountryName" prefWidth="75.0" text="Nombre Pais" visible="false" />
