@@ -203,8 +203,33 @@ public class HomeController implements Initializable {
     private TableView<City> tbl_busqueda;
     
     private ObservableList<City> ListaCity;
+    private TableColumn<?, ?> CLregion;
+    @FXML
+    private TableColumn<?, ?> CLcontinent;
+    @FXML
+    private TableColumn<?, ?> CLindepYear;
+    @FXML
+    private TableColumn<?, ?> CLsurface;
+    @FXML
+    private TableColumn<?, ?> CLgovernmentForm;
+    @FXML
+    private TableColumn<?, ?> CLlanguage;
+    @FXML
+    private TableColumn<?, ?> CLisOfficial;
+    @FXML
+    private TableColumn<?, ?> CLpercentage;
     @FXML
     private CheckBox cbPIndepyear;
+    @FXML
+    private TableView<?> tbl_busquedaCountry;
+    @FXML
+    private TableView<?> tbl_busquedaLanguage;
+    @FXML
+    private TableColumn<?, ?> CL_LcountryCode;
+    @FXML
+    private TableView<?> tbl_busquedaCity;
+    @FXML
+    private TableColumn<?, ?> CL_Ccountrycode;
 
     /**
      * Initializes the controller class.
@@ -676,6 +701,18 @@ public class HomeController implements Initializable {
     //buscar pais
     @FXML
     private void Search_country(ActionEvent event)throws SQLException {
+        String code, mesg;
+        boolean ok;
+        int i = 0;
+        String str = "";
+
+        List<String> ListParameters = new ArrayList<String>();
+        
+        this.tbl_busquedaCity.setVisible(false);
+        this.tbl_busquedaLanguage.setVisible(false);
+        this.tbl_busquedaCountry.setVisible(true);
+
+        code = this.txt_Rcountryinfo.getText();
         
     }
 
@@ -690,6 +727,9 @@ public class HomeController implements Initializable {
 
         List<String> ListParameters = new ArrayList<String>();
         
+        this.tbl_busquedaCity.setVisible(true);
+        this.tbl_busquedaLanguage.setVisible(false);
+        this.tbl_busquedaCountry.setVisible(false);
 
         code = this.txt_cityinfo.getText();
         
@@ -701,6 +741,7 @@ public class HomeController implements Initializable {
                 
                 this.CLcityName.setVisible(true);
                 this.CLid.setVisible(true);
+                this.CL_Ccountrycode.setVisible(true);
                 
                  ListParameters.add("id, name");
 
@@ -757,7 +798,70 @@ public class HomeController implements Initializable {
     //buscar lenguage
     @FXML
     private void Search_language(ActionEvent event)throws SQLException {
+        String code, mesg;
+        boolean ok;
+        int i = 0;
+        String str = "";
+
+        List<String> ListParameters = new ArrayList<String>();
+        List<String> Results = new ArrayList<String>();
+        String aaa[];
+        aaa = new String[4];
         
+        this.tbl_busquedaCity.setVisible(false);
+        this.tbl_busquedaLanguage.setVisible(true);
+        this.tbl_busquedaCountry.setVisible(false);
+
+        code = this.txt_countryLanguageinfo.getText();
+        
+        try {
+            if (code.equals("")) {
+                mesg = "No deje el campo en blanco";
+                this.showMessages(mesg, 1);
+            } else {
+                
+                this.CL_LcountryCode.setVisible(true);
+                this.CLlanguage.setVisible(true);
+                
+                 ListParameters.add("countrycode, language");
+
+                if (this.cbLlanguage.isSelected()) {
+                    ListParameters.add("percentage");
+                    this.CLpercentage.setVisible(true);
+                }
+
+                if (this.cbLisoficial.isSelected()) {
+                    ListParameters.add("isofficial");
+                    this.CLisOfficial.setVisible(true);
+                }
+
+		for (String parameter : ListParameters) {
+                    System.out.println("Indice "+i + " Cadena "+str);
+                    if(i == 0){
+                        str+= parameter;
+                        i++;
+                    }
+                    else if (i-1 != ListParameters.size()){
+                        str+= "," + parameter;
+                        i++;
+                    }
+                    
+                    
+			
+		}
+                
+                System.out.println("select " + str + " from countrylanguage where countrycode like '"+code+"%' or language like '"+code+"%';");
+
+                String sql = "select " + str + " from countrylanguage where countrycode like '"+code+"%' or language like '"+code+"%';";
+                PreparedStatement pst = con.prepareStatement(sql);
+                pst.execute();
+                
+                
+            }
+        } catch (NumberFormatException e) {
+            //mesg = "Error en los datos ingresados, verifique e intente de nuevo";
+            //this.showMessages(mesg, 1);
+        }
     }
 
 //metodos extra
@@ -832,12 +936,10 @@ public class HomeController implements Initializable {
 
     //modelaar tabla
     private void modelarTabla() {
-        this.CLid.setCellValueFactory(new PropertyValueFactory("Id de la ciudad"));
-        this.CLcityName.setCellValueFactory(new PropertyValueFactory("Nombre de la ciudad"));
-        this.CLcityPopulation.setCellValueFactory(new PropertyValueFactory("Poblacion de la ciudad"));
-        this.CLdistrict.setCellValueFactory(new PropertyValueFactory("Distrito"));
-        
-        
+        //this.CLid.setCellValueFactory(new PropertyValueFactory("Id de la ciudad"));
+        //this.CLcityName.setCellValueFactory(new PropertyValueFactory("Nombre de la ciudad"));
+        //this.CLcityPopulation.setCellValueFactory(new PropertyValueFactory("Poblacion de la ciudad"));
+        //this.CLdistrict.setCellValueFactory(new PropertyValueFactory("Distrito"));
     }
 
 }
