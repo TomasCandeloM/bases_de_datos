@@ -30,6 +30,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.StageStyle;
 import javax.swing.table.DefaultTableModel;
+import Gestion.lenguage;
+import javafx.collections.FXCollections;
 
 /**
  * FXML Controller class
@@ -40,6 +42,7 @@ public class HomeController implements Initializable {
 
     Conexion cc = new Conexion();
     Connection con = cc.conectar();
+    DefaultTableModel modelo ;
 
     @FXML
     private CheckBox cbPpopulation;
@@ -220,7 +223,7 @@ public class HomeController implements Initializable {
     @FXML
     private TableColumn<?, ?> CLpercentage;
     @FXML
-    private TableView<?> tbl_busqueda;
+    private TableView<lenguage> tbl_busqueda;
     @FXML
     private CheckBox cbPIndepyear;
 
@@ -855,6 +858,9 @@ public class HomeController implements Initializable {
         String str = "";
 
         List<String> ListParameters = new ArrayList<String>();
+        List<String> Results = new ArrayList<String>();
+        String aaa[];
+        aaa = new String[4];
 
         code = this.txt_countryLanguageinfo.getText();
         
@@ -900,8 +906,27 @@ public class HomeController implements Initializable {
                 PreparedStatement pst = con.prepareStatement(sql);
                 pst.execute();
                 
+                Object[] lenguaje = new Object[4];
+                
+                ResultSet rs = pst.executeQuery(sql);
+                
+                
+                
+                ObservableList<lenguage> lista;
+                lista = FXCollections.observableArrayList();
+                
+                while (rs.next()){
+                //lista.add( new lenguage (rs.getString("countrycode"),rs.getString("language"),rs.getString("isofficial"),rs.getString("percentage")));
+                aaa[0] = rs.getString("countrycode");
+                aaa[1] = rs.getString("language");
+                aaa[2] = rs.getString("isofficial");
+                aaa[3] = rs.getString("percentage");
+                }
+                this.showMessages(aaa.toString(), 2);
+                //this.tbl_busqueda.setItems(lista);
+                
 
-                this.txt_cityinfo.setText("");
+                //this.txt_cityinfo.setText("");
             }
         } catch (NumberFormatException e) {
             //mesg = "Error en los datos ingresados, verifique e intente de nuevo";
@@ -982,21 +1007,23 @@ public class HomeController implements Initializable {
     //modelaar tabla
     private void modelarTabla() {
         this.CLcode.setCellValueFactory(new PropertyValueFactory("Codigo del Pais"));
-        this.CLcityName.setCellValueFactory(new PropertyValueFactory("Nombre de la ciudad"));
-        this.CLcityPopulation.setCellValueFactory(new PropertyValueFactory("Poblacion de la ciudad"));
-        this.CLcontinent.setCellValueFactory(new PropertyValueFactory("Continente"));
         this.CLcountryName.setCellValueFactory(new PropertyValueFactory("Nombre del pais"));
         this.CLcountryPopulation.setCellValueFactory(new PropertyValueFactory("Población del pais"));
-        this.CLdistrict.setCellValueFactory(new PropertyValueFactory("Distrito"));
-        this.CLgovernmentForm.setCellValueFactory(new PropertyValueFactory("Forma de gobierno"));
         this.CLheadOfState.setCellValueFactory(new PropertyValueFactory("Presidente"));
-        this.CLid.setCellValueFactory(new PropertyValueFactory("Id de la ciudad"));
-        this.CLindepYear.setCellValueFactory(new PropertyValueFactory("año de independencia"));
-        this.CLisOfficial.setCellValueFactory(new PropertyValueFactory("Es oficial?"));
-        this.CLlanguage.setCellValueFactory(new PropertyValueFactory("Lenguaje"));
-        this.CLpercentage.setCellValueFactory(new PropertyValueFactory("Porcentaje"));
         this.CLregion.setCellValueFactory(new PropertyValueFactory("Region"));
+        this.CLcontinent.setCellValueFactory(new PropertyValueFactory("Continente"));
+        this.CLindepYear.setCellValueFactory(new PropertyValueFactory("año de independencia"));
         this.CLsurface.setCellValueFactory(new PropertyValueFactory("Superficie"));
+        this.CLgovernmentForm.setCellValueFactory(new PropertyValueFactory("Forma de gobierno"));
+        this.CLid.setCellValueFactory(new PropertyValueFactory("Id de la ciudad"));
+        this.CLcityName.setCellValueFactory(new PropertyValueFactory("Nombre de la ciudad"));
+        this.CLcityPopulation.setCellValueFactory(new PropertyValueFactory("Poblacion de la ciudad"));
+        this.CLdistrict.setCellValueFactory(new PropertyValueFactory("Distrito"));
+        this.CLlanguage.setCellValueFactory(new PropertyValueFactory("Lenguaje"));
+        this.CLisOfficial.setCellValueFactory(new PropertyValueFactory("Es oficial?"));
+        this.CLpercentage.setCellValueFactory(new PropertyValueFactory("Porcentaje"));
+        
+        
     }
 
 }
