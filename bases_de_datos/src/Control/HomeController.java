@@ -223,9 +223,17 @@ public class HomeController implements Initializable {
     @FXML
     private TableColumn<?, ?> CLpercentage;
     @FXML
-    private TableView<Parameters> tbl_busqueda;
-    @FXML
     private CheckBox cbPIndepyear;
+    @FXML
+    private TableView<?> tbl_busquedaCountry;
+    @FXML
+    private TableView<?> tbl_busquedaLanguage;
+    @FXML
+    private TableColumn<?, ?> CL_LcountryCode;
+    @FXML
+    private TableView<?> tbl_busquedaCity;
+    @FXML
+    private TableColumn<?, ?> CL_Ccountrycode;
 
     /**
      * Initializes the controller class.
@@ -701,6 +709,10 @@ public class HomeController implements Initializable {
         String str = "";
 
         List<String> ListParameters = new ArrayList<String>();
+        
+        this.tbl_busquedaCity.setVisible(false);
+        this.tbl_busquedaLanguage.setVisible(false);
+        this.tbl_busquedaCountry.setVisible(true);
 
         code = this.txt_Rcountryinfo.getText();
         
@@ -791,6 +803,9 @@ public class HomeController implements Initializable {
 
         List<String> ListParameters = new ArrayList<String>();
         
+        this.tbl_busquedaCity.setVisible(true);
+        this.tbl_busquedaLanguage.setVisible(false);
+        this.tbl_busquedaCountry.setVisible(false);
 
         code = this.txt_cityinfo.getText();
         
@@ -802,6 +817,7 @@ public class HomeController implements Initializable {
                 
                 this.CLcityName.setVisible(true);
                 this.CLid.setVisible(true);
+                this.CL_Ccountrycode.setVisible(true);
                 
                  ListParameters.add("id, name");
 
@@ -861,6 +877,10 @@ public class HomeController implements Initializable {
         List<String> Results = new ArrayList<String>();
         String aaa[];
         aaa = new String[4];
+        
+        this.tbl_busquedaCity.setVisible(false);
+        this.tbl_busquedaLanguage.setVisible(true);
+        this.tbl_busquedaCountry.setVisible(false);
 
         code = this.txt_countryLanguageinfo.getText();
         
@@ -870,7 +890,7 @@ public class HomeController implements Initializable {
                 this.showMessages(mesg, 1);
             } else {
                 
-                this.CLcode.setVisible(true);
+                this.CL_LcountryCode.setVisible(true);
                 this.CLlanguage.setVisible(true);
                 
                  ListParameters.add("countrycode, language");
