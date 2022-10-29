@@ -199,8 +199,6 @@ public class HomeController implements Initializable {
     private TableColumn<City, Integer> CLcityPopulation;
     @FXML
     private TableColumn<City, String> CLdistrict;
-    @FXML
-    private TableView<City> tbl_busqueda;
     
     private ObservableList<City> ListaCity;
     private TableColumn<?, ?> CLregion;
@@ -225,9 +223,9 @@ public class HomeController implements Initializable {
     @FXML
     private TableView<?> tbl_busquedaLanguage;
     @FXML
-    private TableColumn<?, ?> CL_LcountryCode;
+    private TableColumn<City,String> CL_LcountryCode;
     @FXML
-    private TableView<?> tbl_busquedaCity;
+    private TableView<City> tbl_busquedaCity;
     @FXML
     private TableColumn<?, ?> CL_Ccountrycode;
 
@@ -781,8 +779,9 @@ public class HomeController implements Initializable {
                 ResultSet rs = st.executeQuery(sql);
                 
                 City.llenarInformacionCity(con, ListaCity, sql);
-                this.tbl_busqueda.setItems(ListaCity);
-                this.CLid.setCellValueFactory(new PropertyValueFactory<City, Integer>("code"));
+                this.tbl_busquedaCity.setItems(ListaCity);
+                this.CL_Ccountrycode.setCellValueFactory(new PropertyValueFactory<City, String>("countrycode"));
+                this.CLid.setCellValueFactory(new PropertyValueFactory<City, Integer>("id"));
                 this.CLcityName.setCellValueFactory(new PropertyValueFactory<City, String>("name"));
                 this.CLcityPopulation.setCellValueFactory(new PropertyValueFactory<City, Integer>("population"));
                 this.CLdistrict.setCellValueFactory(new PropertyValueFactory<City, String>("district"));

@@ -17,14 +17,14 @@ import javafx.collections.ObservableList;
  * @author Gabriel J
  */
 public class City {
-    private int code;
+    private int id;
     private String name;
     private String countrycode;
     private String district;
     private int population;
 
-    public City(int code, String name, String countrycode, String district, int population) {
-        this.code = code;
+    public City(int id, String name, String countrycode, String district, int population) {
+        this.id = id;
         this.name = name;
         this.countrycode = countrycode;
         this.district = district;
@@ -33,12 +33,12 @@ public class City {
     
     
     
-    public int getCode() {
-        return code;
+    public int getId() {
+        return id;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -82,7 +82,7 @@ public class City {
             ResultSet resultado = instruccion.executeQuery(sql);
             
             while (resultado.next()){
-             lista.add( new City(resultado.getInt("code"), resultado.getString("name"), resultado.getString("countrycode"), resultado.getString("distric"), resultado.getInt("population")));
+             lista.add( new City(resultado.getInt("id"), resultado.getString("name"), resultado.getString("countrycode"), resultado.getString("district"), resultado.getInt("population")));
                 
                 
             }
