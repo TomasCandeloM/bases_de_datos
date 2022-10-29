@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="687.0" prefWidth="978.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.HomeController">
+<AnchorPane id="AnchorPane" prefHeight="687.0" prefWidth="978.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.HomeController">
    <children>
       <TabPane prefHeight="687.0" prefWidth="978.0" style="-fx-background-color: #18314F;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -184,22 +184,10 @@
                               </Pane>
                               <TableView fx:id="tbl_busqueda" layoutX="378.0" layoutY="129.0" prefHeight="487.0" prefWidth="587.0">
                                 <columns>
-                                  <TableColumn fx:id="CLcode" prefWidth="75.0" text="Codigo Pais" visible="false" />
-                                  <TableColumn fx:id="CLcountryName" prefWidth="75.0" text="Nombre Pais" visible="false" />
-                                    <TableColumn fx:id="CLcountryPopulation" prefWidth="75.0" text="Poblacion pais" visible="false" />
-                                    <TableColumn fx:id="CLheadOfState" prefWidth="75.0" text="Presidente" visible="false" />
-                                    <TableColumn fx:id="CLregion" prefWidth="75.0" text="Region" visible="false" />
-                                    <TableColumn fx:id="CLcontinent" prefWidth="75.0" text="Continente" visible="false" />
-                                    <TableColumn fx:id="CLindepYear" prefWidth="75.0" text="Años de independencia" visible="false" />
-                                    <TableColumn fx:id="CLsurface" prefWidth="75.0" text="Superficie" visible="false" />
-                                    <TableColumn fx:id="CLgovernmentForm" prefWidth="75.0" text="Forma de govierno" visible="false" />
                                     <TableColumn fx:id="CLid" prefWidth="75.0" text="id cuidad" visible="false" />
                                     <TableColumn fx:id="CLcityName" prefWidth="75.0" text="nombre ciudad" visible="false" />
                                     <TableColumn fx:id="CLcityPopulation" prefWidth="75.0" text="Poblacion de la ciudad" visible="false" />
                                     <TableColumn fx:id="CLdistrict" prefWidth="75.0" text="distrito" visible="false" />
-                                    <TableColumn fx:id="CLlanguage" prefWidth="75.0" text="Lenguaje" visible="false" />
-                                    <TableColumn fx:id="CLisOfficial" prefWidth="75.0" text="Es oficial" visible="false" />
-                                    <TableColumn fx:id="CLpercentage" prefWidth="75.0" text="Porcentaje" visible="false" />
                                 </columns>
                               </TableView>
                            </children>

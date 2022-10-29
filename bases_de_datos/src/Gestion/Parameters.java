@@ -179,9 +179,9 @@ public class Parameters {
             ResultSet resultado = instruccion.executeQuery(sql);
             
             while (resultado.next()){
-       //         lista.add(new Parameters(resultado.getString("code"),resultado.getString("name"),resultado.getInt("population"),
-       //             resultado.getString("headofstate"),resultado.getString("region"),resultado.getString("continent"),resultado.getString("indepyear"),
-       //             resultado.getInt("surface"),resultado.getString("goverfrom"),));
+                lista.add(new Parameters(resultado.getString("code"),resultado.getString("countryname"),resultado.getInt("population"),resultado.getString("headofstate"),resultado.getString("region"),resultado.getString("continente"),resultado.getString("indepyear"),resultado.getInt("surface"),resultado.getString("goverfrom"), resultado.getString("distric"), resultado.getString("cityname"),resultado.getInt("id"), resultado.getString("language"), resultado.getString("isoffical"), resultado.getString("percentaje")));
+                
+                
             }
             
         } catch (SQLException ex) {

@@ -4,6 +4,7 @@
  */
 package Control;
 
+import Gestion.City;
 import Gestion.Conexion;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
@@ -191,39 +192,17 @@ public class HomeController implements Initializable {
     @FXML
     private Button btn_Search_language;
     @FXML
-    private TableColumn<?, ?> CLcode;
+    private TableColumn<City, Integer> CLid;
     @FXML
-    private TableColumn<?, ?> CLcountryName;
+    private TableColumn<City, String> CLcityName;
     @FXML
-    private TableColumn<?, ?> CLcountryPopulation;
+    private TableColumn<City, Integer> CLcityPopulation;
     @FXML
-    private TableColumn<?, ?> CLheadOfState;
+    private TableColumn<City, String> CLdistrict;
     @FXML
-    private TableColumn<?, ?> CLregion;
-    @FXML
-    private TableColumn<?, ?> CLcontinent;
-    @FXML
-    private TableColumn<?, ?> CLindepYear;
-    @FXML
-    private TableColumn<?, ?> CLsurface;
-    @FXML
-    private TableColumn<?, ?> CLgovernmentForm;
-    @FXML
-    private TableColumn<?, ?> CLid;
-    @FXML
-    private TableColumn<?, ?> CLcityName;
-    @FXML
-    private TableColumn<?, ?> CLcityPopulation;
-    @FXML
-    private TableColumn<?, ?> CLdistrict;
-    @FXML
-    private TableColumn<?, ?> CLlanguage;
-    @FXML
-    private TableColumn<?, ?> CLisOfficial;
-    @FXML
-    private TableColumn<?, ?> CLpercentage;
-    @FXML
-    private TableView<Parameters> tbl_busqueda;
+    private TableView<City> tbl_busqueda;
+    
+    private ObservableList<City> ListaCity;
     @FXML
     private CheckBox cbPIndepyear;
 
@@ -235,6 +214,8 @@ public class HomeController implements Initializable {
         // TODO
         this.modelarTabla();
         this.llenarCombos();
+        ListaCity = FXCollections.observableArrayList();
+        
     }
 
     // Metodos de añadir a las bases de datos
@@ -695,89 +676,7 @@ public class HomeController implements Initializable {
     //buscar pais
     @FXML
     private void Search_country(ActionEvent event)throws SQLException {
-        String code, mesg;
-        boolean ok;
-        int i = 0;
-        String str = "";
-
-        List<String> ListParameters = new ArrayList<String>();
-
-        code = this.txt_Rcountryinfo.getText();
         
-        try {
-            if (code.equals("")) {
-                mesg = "No deje el campo en blanco";
-                this.showMessages(mesg, 1);
-            } else {
-                
-                this.CLcode.setVisible(true);
-                this.CLcountryName.setVisible(true);
-                
-                 ListParameters.add("code, name");
-
-                if (this.cbPpopulation.isSelected()) {
-                    ListParameters.add("population");
-                    this.CLcountryPopulation.setVisible(true);
-                }
-
-                if (this.cbPheadofstate.isSelected()) {
-                    ListParameters.add("headofstate");
-                    this.CLheadOfState.setVisible(true);
-                }
-                
-                 if (this.cbPRegion.isSelected()) {
-                    ListParameters.add("headofstate");
-                    this.CLregion.setVisible(true);
-                }
-                
-                if (this.cbPContinent.isSelected()) {
-                    ListParameters.add("continent");
-                    this.CLcontinent.setVisible(true);
-                }
-                
-                if (this.cbPSurfacearea.isSelected()) {
-                    ListParameters.add("surfacearea");
-                    this.CLsurface.setVisible(true);
-                }
-                
-                if (this.cbPGovernmentform.isSelected()) {
-                    ListParameters.add("governmentform");
-                    this.CLgovernmentForm.setVisible(true);
-                }
-                
-                if (this.cbPIndepyear.isSelected()) {
-                    ListParameters.add("indepyear");
-                    this.CLindepYear.setVisible(true);
-                }
-
-		for (String parameter : ListParameters) {
-                    System.out.println("Indice "+i + " Cadena "+str);
-                    if(i == 0){
-                        str+= parameter;
-                        i++;
-                    }
-                    else if (i-1 != ListParameters.size()){
-                        str+= "," + parameter;
-                        i++;
-                    }
-                    
-                    
-			
-		}
-                
-                System.out.println("select " + str + " from country where code like '"+code+"%' or name like '"+code+"%';");
-
-                String sql = "select " + str + " from country where code like '"+code+"%' or name like '"+code+"%';";
-                PreparedStatement pst = con.prepareStatement(sql);
-                pst.execute();
-                
-
-                this.txt_cityinfo.setText("");
-            }
-        } catch (NumberFormatException e) {
-            //mesg = "Error en los datos ingresados, verifique e intente de nuevo";
-            //this.showMessages(mesg, 1);
-        }
     }
 
     // buscar ciudad
@@ -840,6 +739,12 @@ public class HomeController implements Initializable {
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(sql);
                 
+                City.llenarInformacionCity(con, ListaCity, sql);
+                this.tbl_busqueda.setItems(ListaCity);
+                this.CLid.setCellValueFactory(new PropertyValueFactory<City, Integer>("code"));
+                this.CLcityName.setCellValueFactory(new PropertyValueFactory<City, String>("name"));
+                this.CLcityPopulation.setCellValueFactory(new PropertyValueFactory<City, Integer>("population"));
+                this.CLdistrict.setCellValueFactory(new PropertyValueFactory<City, String>("district"));
 
                 this.txt_cityinfo.setText("");
             }
@@ -852,66 +757,7 @@ public class HomeController implements Initializable {
     //buscar lenguage
     @FXML
     private void Search_language(ActionEvent event)throws SQLException {
-        String code, mesg;
-        boolean ok;
-        int i = 0;
-        String str = "";
-
-        List<String> ListParameters = new ArrayList<String>();
-        List<String> Results = new ArrayList<String>();
-        String aaa[];
-        aaa = new String[4];
-
-        code = this.txt_countryLanguageinfo.getText();
         
-        try {
-            if (code.equals("")) {
-                mesg = "No deje el campo en blanco";
-                this.showMessages(mesg, 1);
-            } else {
-                
-                this.CLcode.setVisible(true);
-                this.CLlanguage.setVisible(true);
-                
-                 ListParameters.add("countrycode, language");
-
-                if (this.cbLlanguage.isSelected()) {
-                    ListParameters.add("percentage");
-                    this.CLpercentage.setVisible(true);
-                }
-
-                if (this.cbLisoficial.isSelected()) {
-                    ListParameters.add("isofficial");
-                    this.CLisOfficial.setVisible(true);
-                }
-
-		for (String parameter : ListParameters) {
-                    System.out.println("Indice "+i + " Cadena "+str);
-                    if(i == 0){
-                        str+= parameter;
-                        i++;
-                    }
-                    else if (i-1 != ListParameters.size()){
-                        str+= "," + parameter;
-                        i++;
-                    }
-                    
-                    
-			
-		}
-                
-                System.out.println("select " + str + " from countrylanguage where countrycode like '"+code+"%' or language like '"+code+"%';");
-
-                String sql = "select " + str + " from countrylanguage where countrycode like '"+code+"%' or language like '"+code+"%';";
-                PreparedStatement pst = con.prepareStatement(sql);
-                pst.execute();
-                
-                
-            }
-        } catch (NumberFormatException e) {
-            //mesg = "Error en los datos ingresados, verifique e intente de nuevo";
-            //this.showMessages(mesg, 1);
-        }
     }
 
 //metodos extra
@@ -986,22 +832,10 @@ public class HomeController implements Initializable {
 
     //modelaar tabla
     private void modelarTabla() {
-        this.CLcode.setCellValueFactory(new PropertyValueFactory("Codigo del Pais"));
-        this.CLcountryName.setCellValueFactory(new PropertyValueFactory("Nombre del pais"));
-        this.CLcountryPopulation.setCellValueFactory(new PropertyValueFactory("Población del pais"));
-        this.CLheadOfState.setCellValueFactory(new PropertyValueFactory("Presidente"));
-        this.CLregion.setCellValueFactory(new PropertyValueFactory("Region"));
-        this.CLcontinent.setCellValueFactory(new PropertyValueFactory("Continente"));
-        this.CLindepYear.setCellValueFactory(new PropertyValueFactory("año de independencia"));
-        this.CLsurface.setCellValueFactory(new PropertyValueFactory("Superficie"));
-        this.CLgovernmentForm.setCellValueFactory(new PropertyValueFactory("Forma de gobierno"));
         this.CLid.setCellValueFactory(new PropertyValueFactory("Id de la ciudad"));
         this.CLcityName.setCellValueFactory(new PropertyValueFactory("Nombre de la ciudad"));
         this.CLcityPopulation.setCellValueFactory(new PropertyValueFactory("Poblacion de la ciudad"));
         this.CLdistrict.setCellValueFactory(new PropertyValueFactory("Distrito"));
-        this.CLlanguage.setCellValueFactory(new PropertyValueFactory("Lenguaje"));
-        this.CLisOfficial.setCellValueFactory(new PropertyValueFactory("Es oficial?"));
-        this.CLpercentage.setCellValueFactory(new PropertyValueFactory("Porcentaje"));
         
         
     }
