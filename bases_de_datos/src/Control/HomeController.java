@@ -30,7 +30,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.StageStyle;
 import javax.swing.table.DefaultTableModel;
-import Gestion.lenguage;
+import Gestion.Parameters;
 import javafx.collections.FXCollections;
 
 /**
@@ -223,7 +223,7 @@ public class HomeController implements Initializable {
     @FXML
     private TableColumn<?, ?> CLpercentage;
     @FXML
-    private TableView<lenguage> tbl_busqueda;
+    private TableView<Parameters> tbl_busqueda;
     @FXML
     private CheckBox cbPIndepyear;
 
@@ -906,27 +906,7 @@ public class HomeController implements Initializable {
                 PreparedStatement pst = con.prepareStatement(sql);
                 pst.execute();
                 
-                Object[] lenguaje = new Object[4];
                 
-                ResultSet rs = pst.executeQuery(sql);
-                
-                
-                
-                ObservableList<lenguage> lista;
-                lista = FXCollections.observableArrayList();
-                
-                while (rs.next()){
-                //lista.add( new lenguage (rs.getString("countrycode"),rs.getString("language"),rs.getString("isofficial"),rs.getString("percentage")));
-                aaa[0] = rs.getString("countrycode");
-                aaa[1] = rs.getString("language");
-                aaa[2] = rs.getString("isofficial");
-                aaa[3] = rs.getString("percentage");
-                }
-                this.showMessages(aaa.toString(), 2);
-                //this.tbl_busqueda.setItems(lista);
-                
-
-                //this.txt_cityinfo.setText("");
             }
         } catch (NumberFormatException e) {
             //mesg = "Error en los datos ingresados, verifique e intente de nuevo";

@@ -8,7 +8,15 @@ package Gestion;
  *
  * @author tomas
  */
-public class lenguage {
+import java.sql.Connection;
+import java.sql.SQLException;
+import javafx.collections.ObservableList;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.sql.ResultSet;
+
+public class Parameters {
     private String code;
     private String name;
     private int population;
@@ -23,10 +31,19 @@ public class lenguage {
     private String language;
     private String isofficial;
     private String percentaje;
+    private int id;
 
-    public lenguage(String code, String name, int population, String headofstate, String region, String continente, String indepyear, int surface, String goverfrom, String distric, String countrycode, String language, String isofficial, String percentaje) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Parameters(String code, String countryname, int population, String headofstate, String region, String continente, String indepyear, int surface, String goverfrom, String distric, String cityname,int id, String language, String isofficial, String percentaje) {
         this.code = code;
-        this.name = name;
+        this.name = countryname;
         this.population = population;
         this.headofstate = headofstate;
         this.region = region;
@@ -35,7 +52,8 @@ public class lenguage {
         this.surface = surface;
         this.goverfrom = goverfrom;
         this.distric = distric;
-        this.countrycode = countrycode;
+        this.countrycode = cityname;
+        this.id = id;
         this.language = language;
         this.isofficial = isofficial;
         this.percentaje = percentaje;
@@ -154,7 +172,23 @@ public class lenguage {
     }
     
     
-    
+    public static void llenarInformacion(Connection connection, ObservableList<Parameters> lista, String sql){
+        
+        try {
+            Statement instruccion = connection.createStatement();
+            ResultSet resultado = instruccion.executeQuery(sql);
+            
+            while (resultado.next()){
+       //         lista.add(new Parameters(resultado.getString("code"),resultado.getString("name"),resultado.getInt("population"),
+       //             resultado.getString("headofstate"),resultado.getString("region"),resultado.getString("continent"),resultado.getString("indepyear"),
+       //             resultado.getInt("surface"),resultado.getString("goverfrom"),));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Parameters.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
     
     
 }
