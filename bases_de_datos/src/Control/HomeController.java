@@ -227,7 +227,7 @@ public class HomeController implements Initializable {
     @FXML
     private TableView<City> tbl_busquedaCity;
     @FXML
-    private TableColumn<?, ?> CL_Ccountrycode;
+    private TableColumn<City, String> CL_Ccountrycode;
 
     /**
      * Initializes the controller class.
@@ -717,6 +717,9 @@ public class HomeController implements Initializable {
     // buscar ciudad
     @FXML
     private void Search_city(ActionEvent event) throws SQLException {
+        
+        //this.ListaCity.clear();
+        //this.tbl_busquedaCity.setItems(ListaCity);
 
         String code, mesg;
         boolean ok;
@@ -742,19 +745,21 @@ public class HomeController implements Initializable {
                 this.CL_Ccountrycode.setVisible(true);
                 
                  ListParameters.add("id, name");
+                 ListParameters.add("countrycode");
+                 ListParameters.add("population");
+                 ListParameters.add("district");
 
                 if (this.cbCdistrict.isSelected()) {
-                    ListParameters.add("district");
+                    
                     this.CLdistrict.setVisible(true);
                 }
 
                 if (this.cbCpopulation1.isSelected()) {
-                    ListParameters.add("population");
+                    
                     this.CLcityPopulation.setVisible(true);
                 }
 
 		for (String parameter : ListParameters) {
-                    System.out.println("Indice "+i + " Cadena "+str);
                     if(i == 0){
                         str+= parameter;
                         i++;
@@ -770,7 +775,7 @@ public class HomeController implements Initializable {
                 
                 System.out.println("select " + str + " from city where id like '"+code+"%' or name like '"+code+"%';");
 
-                String sql = "select " + str + " from city where id like '"+code+"%' or name like '"+code+"%';";
+                String sql = "select " + str + " from city where id like '"+code+"%' or name like '"+code+"%' or countrycode like '"+code+"%';";
                 PreparedStatement pst = con.prepareStatement(sql);
                 pst.execute();
                 
@@ -778,8 +783,10 @@ public class HomeController implements Initializable {
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(sql);
                 
-                City.llenarInformacionCity(con, ListaCity, sql);
+                this.ListaCity = City.llenarInformacionCity(con, ListaCity, sql);
+                
                 this.tbl_busquedaCity.setItems(ListaCity);
+                
                 this.CL_Ccountrycode.setCellValueFactory(new PropertyValueFactory<City, String>("countrycode"));
                 this.CLid.setCellValueFactory(new PropertyValueFactory<City, Integer>("id"));
                 this.CLcityName.setCellValueFactory(new PropertyValueFactory<City, String>("name"));

@@ -75,7 +75,7 @@ public class City {
         this.population = population;
     }
     
-    public static void llenarInformacionCity(Connection connection, ObservableList<City> lista, String sql){
+    public static ObservableList<City> llenarInformacionCity(Connection connection, ObservableList<City> lista, String sql){
         
         try {
             Statement instruccion = connection.createStatement();
@@ -84,12 +84,13 @@ public class City {
             while (resultado.next()){
              lista.add( new City(resultado.getInt("id"), resultado.getString("name"), resultado.getString("countrycode"), resultado.getString("district"), resultado.getInt("population")));
                 
-                
+             
             }
             
         } catch (SQLException ex) {
             Logger.getLogger(Parameters.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return lista;
         
     }
     
