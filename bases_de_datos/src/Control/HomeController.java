@@ -731,6 +731,9 @@ public class HomeController implements Initializable {
         boolean ok;
         int i = 0;
         String str = "";
+        
+        this.ListaCountry.clear();
+        this.tbl_busquedaCountry.setItems(ListaCountry);
 
         List<String> ListParameters = new ArrayList<String>();
         
@@ -863,8 +866,8 @@ public class HomeController implements Initializable {
     @FXML
     private void Search_city(ActionEvent event) throws SQLException {
         
-        //this.ListaCity.clear();
-        //this.tbl_busquedaCity.setItems(ListaCity);
+        this.ListaCity.clear();
+        this.tbl_busquedaCity.setItems(ListaCity);
 
         String code, mesg;
         boolean ok;
@@ -953,6 +956,9 @@ public class HomeController implements Initializable {
         boolean ok;
         int i = 0;
         String str = "";
+        
+        this.ListaLenguage.clear();
+        this.tbl_busquedaLanguage.setItems(ListaLenguage);
 
         List<String> ListParameters = new ArrayList<String>();
         List<String> Results = new ArrayList<String>();
