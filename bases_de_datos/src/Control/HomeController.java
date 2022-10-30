@@ -6,6 +6,8 @@ package Control;
 
 import Gestion.City;
 import Gestion.Conexion;
+import Gestion.Country;
+import Gestion.Lenguage;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -173,11 +175,8 @@ public class HomeController implements Initializable {
     private ComboBox<String> cbx_UPcontinet;
     @FXML
     private Button btn_UpdateCountry;
-    @FXML
     private ComboBox<String> cbx_Rcity;
-    @FXML
     private ComboBox<String> cbx_Rcountry;
-    @FXML
     private ComboBox<String> cbx_Rlanguage;
     @FXML
     private TextField txt_cityinfo;
@@ -201,33 +200,60 @@ public class HomeController implements Initializable {
     private TableColumn<City, String> CLdistrict;
     
     private ObservableList<City> ListaCity;
+    
     private TableColumn<?, ?> CLregion;
     @FXML
-    private TableColumn<?, ?> CLcontinent;
+    private TableColumn<Lenguage, String> CLlanguage;
     @FXML
-    private TableColumn<?, ?> CLindepYear;
+    private TableColumn<Lenguage, Boolean> CLisOfficial;
     @FXML
-    private TableColumn<?, ?> CLsurface;
-    @FXML
-    private TableColumn<?, ?> CLgovernmentForm;
-    @FXML
-    private TableColumn<?, ?> CLlanguage;
-    @FXML
-    private TableColumn<?, ?> CLisOfficial;
-    @FXML
-    private TableColumn<?, ?> CLpercentage;
+    private TableColumn<Lenguage, Integer> CLpercentage;
     @FXML
     private CheckBox cbPIndepyear;
     @FXML
-    private TableView<?> tbl_busquedaCountry;
+    private TableView<Country> tbl_busquedaCountry;
     @FXML
-    private TableView<?> tbl_busquedaLanguage;
-    @FXML
-    private TableColumn<City,String> CL_LcountryCode;
+    private TableView<Lenguage> tbl_busquedaLanguage;
     @FXML
     private TableView<City> tbl_busquedaCity;
     @FXML
     private TableColumn<City, String> CL_Ccountrycode;
+    @FXML
+    private TableColumn<Country, String> COcode;
+    @FXML
+    private TableColumn<Country, String> COnamecountry;
+    @FXML
+    private TableColumn<Country, Integer> COcountrypopulation;
+    @FXML
+    private TableColumn<Country, String> COheadofstate;
+    @FXML
+    private TableColumn<Country, String> COregion;
+    @FXML
+    private TableColumn<Country, String> COcontinent;
+    @FXML
+    private TableColumn<Country, Integer> COindepyear;
+    @FXML
+    private TableColumn<Country, Integer> COsurface;
+    @FXML
+    private TableColumn<Country, String> COgovermform;
+    @FXML
+    private TableColumn<Country, Integer> COlifeexp;
+    @FXML
+    private TableColumn<Country, Integer> COgnp;
+    @FXML
+    private TableColumn<Country, Integer> COgnpold;
+    @FXML
+    private TableColumn<Country, Integer> COlocalname;
+    @FXML
+    private TableColumn<Country, Integer> COcapital;
+    @FXML
+    private TableColumn<Country, String> COcode2;
+    
+    private ObservableList<Country> ListaCountry;
+    
+    private ObservableList<Lenguage> ListaLenguage;
+    @FXML
+    private TableColumn<Lenguage, String> CL_LcountryCodee;
 
     /**
      * Initializes the controller class.
@@ -238,6 +264,8 @@ public class HomeController implements Initializable {
         this.modelarTabla();
         this.llenarCombos();
         ListaCity = FXCollections.observableArrayList();
+        ListaCountry = FXCollections.observableArrayList();
+        ListaLenguage = FXCollections.observableArrayList();
         
     }
 
@@ -712,6 +740,123 @@ public class HomeController implements Initializable {
 
         code = this.txt_Rcountryinfo.getText();
         
+        try {
+            if (code.equals("")) {
+                mesg = "No deje el campo en blanco";
+                this.showMessages(mesg, 1);
+            } else {
+                
+                this.COcode.setVisible(true);
+                this.COnamecountry.setVisible(true);
+                
+                 ListParameters.add("code, name");
+                 ListParameters.add("continent");
+                 ListParameters.add("region");
+                 ListParameters.add("surfacearea");
+                 ListParameters.add("indepyear");
+                 ListParameters.add("population");
+                 ListParameters.add("lifeexpectancy");
+                 ListParameters.add("gnp");
+                 ListParameters.add("gnpold");
+                 ListParameters.add("localname");
+                 ListParameters.add("governmentform");
+                 ListParameters.add("headofstate");
+                 ListParameters.add("capital");
+                 ListParameters.add("code2");
+
+                if (this.cbPpopulation.isSelected()) {
+                    
+                    this.COcountrypopulation.setVisible(true);
+                }
+
+                if (this.cbPheadofstate.isSelected()) {
+                    
+                    this.COheadofstate.setVisible(true);
+                }
+                
+                if (this.cbPRegion.isSelected()) {
+                    
+                    this.COregion.setVisible(true);
+                }
+                
+                if (this.cbPContinent.isSelected()) {
+                    
+                    this.COcontinent.setVisible(true);
+                }
+                
+                if (this.cbPIndepyear.isSelected()) {
+                    
+                    this.COindepyear.setVisible(true);
+                }
+                
+                if (this.cbPSurfacearea.isSelected()) {
+                    
+                    this.COsurface.setVisible(true);
+                }
+                
+                if (this.cbPGovernmentform.isSelected()) {
+                    
+                    this.COgovermform.setVisible(true);
+                }
+                
+                this.COlifeexp.setVisible(true);
+                this.COgnp.setVisible(true);
+                this.COgnpold.setVisible(true);
+                this.COlocalname.setVisible(true);
+                this.COcapital.setVisible(true);
+                this.COcode2.setVisible(true);
+
+		for (String parameter : ListParameters) {
+                    if(i == 0){
+                        str+= parameter;
+                        i++;
+                    }
+                    else if (i-1 != ListParameters.size()){
+                        str+= "," + parameter;
+                        i++;
+                    }
+                    
+                    
+			
+		}
+                
+                System.out.println("select " + str + " from country where code like '"+code+"%' or name like '"+code+"%';");
+
+                String sql = "select " + str + " from country where code like '"+code+"%' or name like '"+code+"%';";
+                PreparedStatement pst = con.prepareStatement(sql);
+                pst.execute();
+                
+                
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                
+                this.ListaCountry = Country.llenarInformacionCountry(con, ListaCountry, sql);
+                
+                this.tbl_busquedaCountry.setItems(ListaCountry);
+                
+                this.COcode.setCellValueFactory(new PropertyValueFactory<Country, String>("code"));
+                this.COnamecountry.setCellValueFactory(new PropertyValueFactory<Country, String>("name"));
+                this.COcountrypopulation.setCellValueFactory(new PropertyValueFactory<Country, Integer>("population"));
+                this.COheadofstate.setCellValueFactory(new PropertyValueFactory<Country, String>("headofstate"));
+                this.COregion.setCellValueFactory(new PropertyValueFactory<Country, String>("region"));
+                this.COcontinent.setCellValueFactory(new PropertyValueFactory<Country, String>("continent"));
+                this.COindepyear.setCellValueFactory(new PropertyValueFactory<Country, Integer>("indepyear"));
+                this.COsurface.setCellValueFactory(new PropertyValueFactory<Country, Integer>("surfacearea"));
+                this.COgovermform.setCellValueFactory(new PropertyValueFactory<Country, String>("governmentform"));
+                this.COlifeexp.setCellValueFactory(new PropertyValueFactory<Country, Integer>("lifeexpectancy"));
+                this.COgnp.setCellValueFactory(new PropertyValueFactory<Country, Integer>("GNP"));
+                this.COgnpold.setCellValueFactory(new PropertyValueFactory<Country, Integer>("GNPOld"));
+                this.COlocalname.setCellValueFactory(new PropertyValueFactory<Country, Integer>("localname"));
+                this.COcapital.setCellValueFactory(new PropertyValueFactory<Country, Integer>("capital"));
+                this.COcode2.setCellValueFactory(new PropertyValueFactory<Country, String>("code2"));
+
+                this.txt_Rcountryinfo.setText("");
+            }
+        } catch (NumberFormatException e) {
+            //mesg = "Error en los datos ingresados, verifique e intente de nuevo";
+            //this.showMessages(mesg, 1);
+        }
+        
     }
 
     // buscar ciudad
@@ -821,28 +966,30 @@ public class HomeController implements Initializable {
         code = this.txt_countryLanguageinfo.getText();
         
         try {
+            
             if (code.equals("")) {
                 mesg = "No deje el campo en blanco";
                 this.showMessages(mesg, 1);
             } else {
                 
-                this.CL_LcountryCode.setVisible(true);
+                this.CL_LcountryCodee.setVisible(true);
                 this.CLlanguage.setVisible(true);
                 
                  ListParameters.add("countrycode, language");
+                 ListParameters.add("isofficial");
+                 ListParameters.add("percentage");
 
                 if (this.cbLlanguage.isSelected()) {
-                    ListParameters.add("percentage");
+                    
                     this.CLpercentage.setVisible(true);
                 }
 
                 if (this.cbLisoficial.isSelected()) {
-                    ListParameters.add("isofficial");
+                    
                     this.CLisOfficial.setVisible(true);
                 }
 
 		for (String parameter : ListParameters) {
-                    System.out.println("Indice "+i + " Cadena "+str);
                     if(i == 0){
                         str+= parameter;
                         i++;
@@ -863,7 +1010,23 @@ public class HomeController implements Initializable {
                 pst.execute();
                 
                 
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                
+                this.ListaLenguage = Lenguage.llenarInformacionLenguage(con, ListaLenguage, sql);
+                
+                this.tbl_busquedaLanguage.setItems(ListaLenguage);
+                
+                this.CL_LcountryCodee.setCellValueFactory(new PropertyValueFactory<Lenguage, String>("countrycode"));
+                this.CLpercentage.setCellValueFactory(new PropertyValueFactory<Lenguage, Integer>("percetange"));
+                this.CLisOfficial.setCellValueFactory(new PropertyValueFactory<Lenguage, Boolean>("isofficial"));
+                this.CLlanguage.setCellValueFactory(new PropertyValueFactory<Lenguage, String>("language"));
+
+                this.txt_cityinfo.setText("");
             }
+                
+                
+            
         } catch (NumberFormatException e) {
             //mesg = "Error en los datos ingresados, verifique e intente de nuevo";
             //this.showMessages(mesg, 1);
@@ -925,18 +1088,6 @@ public class HomeController implements Initializable {
         this.cbx_UPcontinet.getItems().add("Oceania");
         this.cbx_UPcontinet.getItems().add("Antartica");
         this.cbx_UPcontinet.getItems().add("South America");
-
-        this.cbx_Rlanguage.getItems().clear();
-        this.cbx_Rlanguage.getItems().add("Codigo del pais");
-        this.cbx_Rlanguage.getItems().add("Idioma");
-
-        this.cbx_Rcity.getItems().clear();
-        this.cbx_Rcity.getItems().add("Id");
-        this.cbx_Rcity.getItems().add("Nombre");
-
-        this.cbx_Rcountry.getItems().clear();
-        this.cbx_Rcountry.getItems().add("Codigo");
-        this.cbx_Rcountry.getItems().add("Nombre");
 
     }
 

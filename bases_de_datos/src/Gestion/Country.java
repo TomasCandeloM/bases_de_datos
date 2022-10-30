@@ -25,11 +25,11 @@ public class Country {
     private Integer surfacearea;
     private Integer indepyear;
     private Integer population;
-    private Integer lifeexp;
+    private Integer lifeexpectancy;
     private Integer GNP;
     private Integer GNPOld;
     private String localname;
-    private String goverform;
+    private String governmentform;
     private String headofstate;
     private Integer capital;
     private String code2;
@@ -42,11 +42,11 @@ public class Country {
         this.surfacearea = surfacearea;
         this.indepyear = indepyear;
         this.population = population;
-        this.lifeexp = lifeexp;
+        this.lifeexpectancy = lifeexp;
         this.GNP = GNP;
         this.GNPOld = GNPOld;
         this.localname = localname;
-        this.goverform = goverform;
+        this.governmentform = goverform;
         this.headofstate = headofstate;
         this.capital = capital;
         this.code2 = code2;
@@ -110,12 +110,12 @@ public class Country {
         this.population = population;
     }
 
-    public Integer getLifeexp() {
-        return lifeexp;
+    public Integer getLifeexpectancy() {
+        return lifeexpectancy;
     }
 
-    public void setLifeexp(Integer lifeexp) {
-        this.lifeexp = lifeexp;
+    public void setLifeexpectancy(Integer lifeexpectancy) {
+        this.lifeexpectancy = lifeexpectancy;
     }
 
     public Integer getGNP() {
@@ -142,12 +142,12 @@ public class Country {
         this.localname = localname;
     }
 
-    public String getGoverform() {
-        return goverform;
+    public String getGovernmentform() {
+        return governmentform;
     }
 
-    public void setGoverform(String goverform) {
-        this.goverform = goverform;
+    public void setGovernmentform(String governmentform) {
+        this.governmentform = governmentform;
     }
 
     public String getHeadofstate() {
@@ -174,19 +174,20 @@ public class Country {
         this.code2 = code2;
     }
     
-    public static void llenarInformacionCity(Connection connection, ObservableList<Country> lista, String sql){
+    public static ObservableList<Country> llenarInformacionCountry(Connection connection, ObservableList<Country> lista, String sql){
         
         try {
             Statement instruccion = connection.createStatement();
             ResultSet resultado = instruccion.executeQuery(sql);
             
-            while (resultado.next()){                
-                
+            while (resultado.next()){
+                lista.add(new Country(resultado.getString("code"), resultado.getString("name"), resultado.getString("continent"), resultado.getString("region"), resultado.getInt("surfacearea"), resultado.getInt("indepyear"), resultado.getInt("population"), resultado.getInt("lifeexpectancy"), resultado.getInt("GNP"), resultado.getInt("GNPOld"), resultado.getString("localname"), resultado.getString("governmentform"), resultado.getString("headofstate"), resultado.getInt("capital"), resultado.getString("code2")));               
             }
             
         } catch (SQLException ex) {
             Logger.getLogger(Parameters.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return lista;
         
     }
     
