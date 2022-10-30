@@ -1024,7 +1024,7 @@ public class HomeController implements Initializable {
                 this.tbl_busquedaLanguage.setItems(ListaLenguage);
                 
                 this.CL_LcountryCodee.setCellValueFactory(new PropertyValueFactory<Lenguage, String>("countrycode"));
-                this.CLpercentage.setCellValueFactory(new PropertyValueFactory<Lenguage, Integer>("percetange"));
+                this.CLpercentage.setCellValueFactory(new PropertyValueFactory<Lenguage, Integer>("percentage"));
                 this.CLisOfficial.setCellValueFactory(new PropertyValueFactory<Lenguage, Boolean>("isofficial"));
                 this.CLlanguage.setCellValueFactory(new PropertyValueFactory<Lenguage, String>("language"));
 
