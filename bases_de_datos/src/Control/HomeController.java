@@ -619,6 +619,7 @@ public class HomeController implements Initializable {
     private void Delete_Country(ActionEvent event) {
         String code, mesg;
         boolean ok;
+        PreparedStatement pst;
 
         code = this.txt_EPcode.getText();
 
@@ -627,13 +628,22 @@ public class HomeController implements Initializable {
                 mesg = "codigo del pais no ingresado";
                 this.showMessages(mesg, 1);
             } else {
-                mesg = "Confirma que desea eliminar el pais?";
+                mesg = "Confirma que desea eliminar el pais? Esta accion tambien eliminará todos los elementos relacionados al pais";
                 ok = this.showMessages(mesg, 3);
-
                 if (ok) {
-                    String sql = "delete from country where code like '%" + code + "%'";
-                    PreparedStatement pst = con.prepareStatement(sql);
+                    
+                    String sqlCity = "delete from city where countrycode like '%" + code + "%'";
+                    pst = con.prepareStatement(sqlCity);
                     pst.execute();
+                    
+                    String sqlLanguage = "delete from countrylanguage where countrycode like '%" + code + "%'";
+                    pst = con.prepareStatement(sqlLanguage);
+                    pst.execute();
+  
+                    String sqlCountry = "delete from country where code like '%" + code + "%'";
+                    pst = con.prepareStatement(sqlCountry);
+                    pst.execute();
+                    
                     mesg = "Pais eliminado";
                     this.showMessages(mesg, 2);
 
