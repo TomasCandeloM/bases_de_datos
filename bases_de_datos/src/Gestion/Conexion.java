@@ -18,13 +18,15 @@ public class Conexion {
     String bd ="world";
     String url = "jdbc:mysql://localhost:3306/";
     String user = "root";
-    String password ="98765"; //98765 o 147852
+    public String password; 
+
+    public Conexion(String password) {
+        this.password = password;
+    }
+    
+    
     String driver ="com.mysql.cj.jdbc.Driver";
     Connection cx;
-
-    public Conexion() {
-        
-    }
 
   public Connection conectar() {
         try {

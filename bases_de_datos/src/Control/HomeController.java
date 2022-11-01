@@ -35,6 +35,7 @@ import javafx.stage.StageStyle;
 import javax.swing.table.DefaultTableModel;
 import Gestion.Parameters;
 import javafx.collections.FXCollections;
+import start.Bases_de_datos;
 
 /**
  * FXML Controller class
@@ -43,7 +44,7 @@ import javafx.collections.FXCollections;
  */
 public class HomeController implements Initializable {
 
-    Conexion cc = new Conexion();
+    Conexion cc = new Conexion(Bases_de_datos.getPass());
     Connection con = cc.conectar();
     DefaultTableModel modelo ;
 

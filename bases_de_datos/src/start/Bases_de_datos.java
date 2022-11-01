@@ -8,16 +8,25 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javax.swing.Box;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 
 public class Bases_de_datos extends Application{
 
+    private static String pass;
+    
     public static void main(String[] args) {
         
         //conexion con MYSQL
-        Conexion conexion = new Conexion();
+        pass = getPassword(); 
+        System.out.println(pass);
+        Conexion conexion = new Conexion(pass);
         conexion.conectar();
         launch(args);
     }
+
     
 
     @Override
@@ -31,6 +40,26 @@ public class Bases_de_datos extends Application{
 
         //ventana.setOnCloseRequest(event -> {event.consume();}); //deshabilita la X de cerrar...
         ventana.show();
+    }
+    
+    private static String getPassword() {
+        JPasswordField pass = new JPasswordField() ;
+        JLabel jl = new JLabel("Ingrese su contraseña para conectar con SQL: ");
+        Box box = Box.createVerticalBox();
+        box.add(jl);
+        box.add(pass);
+        
+        int x = JOptionPane.showConfirmDialog(null, box, "Password", JOptionPane.OK_CANCEL_OPTION);
+        
+        if (x == JOptionPane.OK_OPTION){
+            return pass.getText();
+        }
+        return null;
+      }
+    
+    
+    public static String getPass() {
+        return pass;
     }
 
 }
